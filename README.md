@@ -1,4 +1,4 @@
 Bakkevej web app
 ========
 
-Mobile web app: ToDo &amp; calendar tool for adults and children at orphanages. 
+Mobile web app based on Drupal: ToDo &amp; calendar tool for adults and children at orphanages. 
