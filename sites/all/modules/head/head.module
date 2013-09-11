@@ -1,0 +1,1314 @@
+<?php
+
+/**
+ * @file
+ * Code to add some additional meta tags to the head of the page
+ *
+ * Ideally this functionality would extend the appearance settings page but
+ * currently the file_managed element does not play nice with themes that
+ * implement their own form validation callbacks.
+ */
+
+/**
+ * Implements hook_menu().
+ *
+ * @return array
+ *   Returns the newly defined menu links and callbacks.
+ */
+function head_menu() {
+
+  $items['admin/appearance/advanced'] = array(
+    'title' => 'Advanced Settings',
+    'description' => 'Configure default and theme specific meta tags.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('head_settings'),
+    'access arguments' => array('administer themes'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 100,
+  );
+
+  // Advanced configuration subtabs.
+  $items['admin/appearance/advanced/global'] = array(
+    'title' => 'Global settings',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -1,
+  );
+
+  // Add a local task for each available theme.
+  foreach (list_themes() as $theme) {
+    $items['admin/appearance/advanced/' . $theme->name] = array(
+      'title' => $theme->info['name'],
+      'page arguments' => array('head_settings', $theme->name),
+      'type' => MENU_LOCAL_TASK,
+      'access callback' => '_system_themes_access',
+      'access arguments' => array($theme),
+    );
+  }
+
+  return $items;
+}
+
+/**
+ * Implements hook_form_system_theme_settings_alter().
+ *
+ * @param array $form
+ *   Nested array of form elements that comprise the form.
+ * @param array $form_state
+ *   A keyed array containing the current state of the form.
+ */
+function head_settings($form, &$form_state, $key = 'global') {
+
+  // If we have just added another jumplist group then this will be TRUE.
+  if (!isset($form_state['open_jumplists'])) {
+    $form_state['open_jumplists'] = FALSE;
+  }
+
+  // Save the current theme name in the form state.
+  $form_state['theme_key'] = $key;
+
+  // Retrieve the settings for all themes.
+  $all_settings = variable_get('head_settings');
+
+  // Get the settings for a specific theme.
+  if (isset($all_settings[$key])) {
+    $settings = $all_settings[$key];
+  }
+  else {
+    $settings = array();
+  }
+
+  $form['#attached']['css'] = array(
+    drupal_get_path('module', 'head') . '/head.css',
+  );
+
+
+  $form['icons-intro'] = array(
+    '#type' => 'item',
+    '#title' => t('Icons & Splash Screens'),
+    '#description' => t('Mobile specific icons and splash screens, you can find out more information from the Apple iOS developer documentation.<br/>') . l(t('Custom Icon and Image Creation Guidelines'), 'http://developer.apple.com/library/ios/#documentation/userexperience/conceptual/mobilehig/IconsImages/IconsImages.html') . ", " . l(t('Web Clip Icons'), 'http://developer.apple.com/library/ios/#documentation/userexperience/conceptual/mobilehig/IconsImages/IconsImages.html#//apple_ref/doc/uid/TP40006556-CH14-SW11'),
+  );
+
+  // Create a table for all the possible touch icons, the children of this
+  // element will not be rendered directly but will be referenced by each row of
+  // the table.
+  $form['icons'] = array(
+    '#theme' => 'table',
+    '#header' => array(t('Type'), t('Size'), t('File')),
+    '#rows' => array(),
+    '#tree' => TRUE,
+  );
+
+  // Apple touch icon file.
+  $form['icons']['touch-icon'] = array(
+    '#title' => NULL,
+    '#type' => 'managed_file',
+    '#upload_location' => 'public://',
+    '#default_value' => (isset($settings['icons']['touch-icon']) ? $settings['icons']['touch-icon'] : '0'),
+    '#upload_validators' => array(
+      'file_validate_extensions' => array('gif png jpg jpeg'),
+    ),
+  );
+
+  // Apple touch icon precomposed file.
+  $form['icons']['touch-icon-precomposed'] = array(
+    '#title' => NULL,
+    '#type' => 'managed_file',
+    '#upload_location' => 'public://',
+    '#default_value' => (isset($settings['icons']['touch-icon-precomposed']) ? $settings['icons']['touch-icon-precomposed'] : '0'),
+    '#upload_validators' => array(
+      'file_validate_extensions' => array('gif png jpg jpeg'),
+    ),
+  );
+
+  // Apple touch icon precomposed 72x72 file.
+  $form['icons']['touch-icon-72x72-precomposed'] = array(
+    '#title' => NULL,
+    '#type' => 'managed_file',
+    '#upload_location' => 'public://',
+    '#default_value' => (isset($settings['icons']['touch-icon-72x72-precomposed']) ? $settings['icons']['touch-icon-72x72-precomposed'] : '0'),
+    '#upload_validators' => array(
+      'file_validate_extensions' => array('gif png jpg jpeg'),
+      'head_file_validate_image_resolution' => array("72x72"),
+    ),
+  );
+
+  // Apple touch icon precomposed 114x114 file.
+  $form['icons']['touch-icon-114x114-precomposed'] = array(
+    '#title' => NULL,
+    '#type' => 'managed_file',
+    '#upload_location' => 'public://',
+    '#default_value' => (isset($settings['icons']['touch-icon-114x114-precomposed']) ? $settings['icons']['touch-icon-114x114-precomposed'] : '0'),
+    '#upload_validators' => array(
+      'file_validate_extensions' => array('gif png jpg jpeg'),
+      'head_file_validate_image_resolution' => array("114x114"),
+    ),
+  );
+
+
+  // Apple touch icon precomposed 144x144 file.
+  $form['icons']['touch-icon-144x144-precomposed'] = array(
+    '#title' => NULL,
+    '#type' => 'managed_file',
+    '#upload_location' => 'public://',
+    '#default_value' => (isset($settings['icons']['touch-icon-144x144-precomposed']) ? $settings['icons']['touch-icon-144x144-precomposed'] : '0'),
+    '#upload_validators' => array(
+      'file_validate_extensions' => array('gif png jpg jpeg'),
+      'head_file_validate_image_resolution' => array("144x144"),
+    ),
+  );
+
+  // Apple iPhone startup image File.
+  $form['icons']['iphone-startup'] = array(
+    '#title' => NULL,
+    '#type' => 'managed_file',
+    '#upload_location' => 'public://',
+    '#default_value' => (isset($settings['icons']['iphone-startup']) ? $settings['icons']['iphone-startup'] : '0'),
+    '#upload_validators' => array(
+      'file_validate_extensions' => array('gif png jpg jpeg'),
+      'head_file_validate_image_resolution' => array("320x460"),
+    ),
+  );
+  
+  // Apple iPhone Retina startup image File.
+  $form['icons']['iphone-retina-startup'] = array(
+    '#title' => NULL,
+    '#type' => 'managed_file',
+    '#upload_location' => 'public://',
+    '#default_value' => (isset($settings['icons']['iphone-retina-startup']) ? $settings['icons']['iphone-retina-startup'] : '0'),
+    '#upload_validators' => array(
+      'file_validate_extensions' => array('gif png jpg jpeg'),
+      'head_file_validate_image_resolution' => array("640x920"),
+    ),
+  );
+  
+  // Apple iPhone5 Retina startup image File.
+  $form['icons']['iphone5-retina-startup'] = array(
+    '#title' => NULL,
+    '#type' => 'managed_file',
+    '#upload_location' => 'public://',
+    '#default_value' => (isset($settings['icons']['iphone5-retina-startup']) ? $settings['icons']['iphone5-retina-startup'] : '0'),
+    '#upload_validators' => array(
+      'file_validate_extensions' => array('gif png jpg jpeg'),
+      'head_file_validate_image_resolution' => array("640x1096"),
+    ),
+  );
+
+  // Apple iPhone startup image landscape file.
+  $form['icons']['ipad-landscape-startup'] = array(
+    '#title' => NULL,
+    '#type' => 'managed_file',
+    '#upload_location' => 'public://',
+    '#default_value' => (isset($settings['icons']['ipad-landscape-startup']) ? $settings['icons']['ipad-landscape-startup'] : '0'),
+    '#upload_validators' => array(
+      'file_validate_extensions' => array('gif png jpg jpeg'),
+      'head_file_validate_image_resolution' => array("1024x748"),
+    ),
+  );
+
+  // Apple iPhone startup image portrait file.
+  $form['icons']['ipad-portrait-startup'] = array(
+    '#title' => NULL,
+    '#type' => 'managed_file',
+    '#upload_location' => 'public://',
+    '#default_value' => (isset($settings['icons']['ipad-portrait-startup']) ? $settings['icons']['ipad-portrait-startup'] : '0'),
+    '#upload_validators' => array(
+      'file_validate_extensions' => array('gif png jpg jpeg'),
+      'head_file_validate_image_resolution' => array("768x1004"),
+    ),
+    '#attributes' => array(
+      'style' => 'white-space:normal;',
+    ),
+  );
+
+  // Apple iPhone startup image portrait file.
+  $form['icons']['ipad-portrait-retina-startup'] = array(
+    '#title' => NULL,
+    '#type' => 'managed_file',
+    '#upload_location' => 'public://',
+    '#default_value' => (isset($settings['icons']['ipad-portrait-retina-startup']) ? $settings['icons']['ipad-portrait-retina-startup'] : '0'),
+    '#upload_validators' => array(
+      'file_validate_extensions' => array('gif png jpg jpeg'),
+      'head_file_validate_image_resolution' => array("1536x2008"),
+    ),
+    '#attributes' => array(
+      'style' => 'white-space:normal;',
+    ),
+  );
+
+  // Apple iPhone startup image landscape file.
+  $form['icons']['ipad-landscape-retina-startup'] = array(
+    '#title' => NULL,
+    '#type' => 'managed_file',
+    '#upload_location' => 'public://',
+    '#default_value' => (isset($settings['icons']['ipad-landscape-retina-startup']) ? $settings['icons']['ipad-landscape-retina-startup'] : '0'),
+    '#upload_validators' => array(
+      'file_validate_extensions' => array('gif png jpg jpeg'),
+      'head_file_validate_image_resolution' => array("2048x1496"),
+    ),
+    '#attributes' => array(
+      'style' => 'white-space:normal;',
+    ),
+  );
+
+  // Add the Apple Touch Icon row to the table
+  $form['icons']['#rows'][] = array(
+    t('Apple Touch Icon') . ' <br/><small>' . t('For non-Retina iPhone, iPod Touch, and Android 2.1+ devices') . '</small>',
+    t('57x57'),
+    array('data' => &$form['icons']['touch-icon']),
+  );
+
+  // Add the Apple Touch Icon Precomposed image row to the table.
+  $form['icons']['#rows'][] = array(
+    t('Apple Touch Icon Precomposed') . ' <br/><small>' . t('For non-Retina iPhone, iPod Touch, and Android 2.1+ devices') . '</small>',
+    t('57x57'),
+    array('data' => &$form['icons']['touch-icon-precomposed']),
+  );
+
+  // Add the Apple Touch Icon 72x72 Precomposed image row to the table.
+  $form['icons']['#rows'][] = array(
+    t('Apple Touch Icon 72x72 Precomposed') . ' <br/><small>' . t('For the first-generation iPad') . '</small>',
+    t('72x72'),
+    array('data' => &$form['icons']['touch-icon-72x72-precomposed']),
+  );
+
+  // Add the Apple Touch Icon 114x114 Precomposed image row to the table.
+  $form['icons']['#rows'][] = array(
+    t('Apple Touch Icon 114x114 Precomposed') . ' <br/><small>' . t('For the iPhone 4 with high-resolution Retina Display') . '</small>',
+    t('114x114'),
+    array('data' => &$form['icons']['touch-icon-114x114-precomposed']),
+  );
+
+  // Add the Apple Touch Icon 144x144 Precomposed image row to the table.
+  $form['icons']['#rows'][] = array(
+    t('Apple Touch Icon 144x144 Precomposed') . ' <br/><small>' . t('For third-generation iPad with high-resolution Retina display') . '</small>',
+    t('144x144'),
+    array('data' => &$form['icons']['touch-icon-144x144-precomposed']),
+  );
+
+  // Add the iPhone Startup image row to the table.
+  $form['icons']['#rows'][] = array(
+    t('iPhone Startup Image') . ' <br/><small>' . t('iPhone startup image has to be exactly 320x460 pixels') . '</small>',
+    t('320x460'),
+    array('data' => &$form['icons']['iphone-startup']),
+  );
+  
+  // Add the iPhone Startup image row to the table.
+  $form['icons']['#rows'][] = array(
+    t('iPhone Retina Startup Image') . ' <br/><small>' . t('iPhone startup image has to be exactly 640x920 pixels') . '</small>',
+    t('640x920'),
+    array('data' => &$form['icons']['iphone-retina-startup']),
+  );
+  
+  // Add the iPhone 5 Startup image row to the table.
+  $form['icons']['#rows'][] = array(
+    t('iPhone 5 Retina Startup Image') . ' <br/><small>' . t('iPhone startup image has to be exactly 640x1096 pixels') . '</small>',
+    t('640x1096'),
+    array('data' => &$form['icons']['iphone5-retina-startup']),
+  );
+
+  // Add the Apple iPhone startup image (landscape) row to the table.
+  $form['icons']['#rows'][] = array(
+    t('iPad Startup Image [landscape]') . ' <br/><small>' . t('iPad landscape startup image has to be exactly 1024x748 pixels') . '</small>',
+    t('1024x768'),
+    array('data' => &$form['icons']['ipad-landscape-startup']),
+  );
+
+  // Add the Apple iPad startup image (portrait) row to the table.
+  $form['icons']['#rows'][] = array(
+    t('iPad Startup Image [portrait]') . ' <br/><small>' . t('iPad portrait startup image has to be exactly 768x1004 pixels') . '</small>',
+    t('768x1004'),
+    array('data' => &$form['icons']['ipad-portrait-startup']),
+  );
+
+  // Add the Apple iPad startup image (portrait) row to the table.
+  $form['icons']['#rows'][] = array(
+    t('iPad Retina Startup Image [portrait]') . ' <br/><small>' . t('iPad startup image has to be exactly 1536x2008 pixels') . '</small>',
+    t('1536x2008'),
+    array('data' => &$form['icons']['ipad-portrait-retina-startup']),
+  );
+
+  // Add the Apple iPad startup image (landscape) row to the table.
+  $form['icons']['#rows'][] = array(
+    t('iPad Retina Startup Image [landscape]') . ' <br/><small>' . t('iPad startup image has to be exactly 2048x1496 pixels') . '</small>',
+    t('2048x1496'),
+    array('data' => &$form['icons']['ipad-landscape-retina-startup']),
+  );
+
+  $form['metatags']['title'] = array(
+    '#type' => 'item',
+    '#title' => t('Meta Tags'),
+    '#description' => t('Add meta tags to the document head'),
+  );
+
+  // Internet Explorer Settings.
+  $form['ie'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Internet Explorer'),
+    '#collapsible' => TRUE,
+    '#collapsed' => ($form_state['open_jumplists'] ? FALSE : TRUE),
+    '#tree' => TRUE,
+  );
+
+  // Suppress the ie6 toolbar.
+  $form['ie']['suppress-toolbar'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Suppress IE6 Toolbar'),
+    '#default_value' => (isset($settings['ie']['suppress-toolbar']) ? $settings['ie']['suppress-toolbar'] : ''),
+    '#description' => t("Kill IE6's pop-up-on-mouseover toolbar for images that can interfere with certain designs and be pretty distracting in general."),
+  );
+
+  // IE10 Metro prompt.
+  $form['ie']['metro-prompt'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Prompt users to switch to "Desktop Mode" in IE10 Metro'),
+    '#default_value' => (isset($settings['ie']['metro-prompt']) ? $settings['ie']['metro-prompt'] : ''),
+    '#description' => t('IE10 does not support plugins, such as Flash, in Metro Mode. If your site requires plugins, you can let users know that via the X-UA-Compatible meta element, which will prompt them to switch to Desktop Mode.'),
+  );
+
+  // ClearType.
+  $form['ie']['cleartype'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Activate ClearType font smoothing'),
+    '#default_value' => (isset($settings['ie']['cleartype']) ? $settings['ie']['cleartype'] : NULL),
+    '#description' => t('Mobile IE allows us to activate ClearType technology for smoothing fonts for easy reading.'),
+  );
+
+  // IE Edge.
+  $form['ie']['edge'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Force latest IE Version'),
+    '#default_value' => (isset($settings['ie']['edge']) ? $settings['ie']['edge'] : NULL),
+    '#description' => t('Tell IE it should use the latest, or edge, version of the IE rendering environment; second, if already installed, it should use the Chrome frame’s rendering engine.'),
+  );
+
+  // Chrome Frame.
+  $form['ie']['chrome-frame'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Add google chrome frame'),
+    '#default_value' => (isset($settings['ie']['chrome-frame']) ? $settings['ie']['chrome-frame'] : NULL),
+    '#description' => t("Add google chrome frame script to the footer fo the site.."),
+  );
+
+  // Allow pinned sites.
+  $form['ie']['allow-pinned'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable Site Pinning'),
+    '#default_value' => (isset($settings['ie']['allow-pinned']) ? $settings['ie']['allow-pinned'] : NULL),
+    '#description' => t('Enabling your application for pinning will allow IE9 users to add it to their Windows Taskbar and Start Menu. This comes with a range of new tools that you can easily configure with the elements below.'),
+  );
+
+  // Pinned site details.
+  $form['ie']['pinned'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Pinned Site Details'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#states' => array(
+      'visible' => array(
+        ':input[name="ie[allow-pinned]"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+
+  // Pinned site name.
+  $form['ie']['pinned']['name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Name the pinned site for windows'),
+    '#default_value' => (isset($settings['ie']['pinned']['name']) ? $settings['ie']['pinned']['name'] : ''),
+    '#description' => t("Without this rule, Windows will use the page title as the name for your application."),
+  );
+
+  // Pinned Site Tooltip.
+  $form['ie']['pinned']['tooltip'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Give your Pinned Site a tooltip'),
+    '#default_value' => (isset($settings['ie']['pinned']['tooltip']) ? $settings['ie']['pinned']['tooltip'] : ''),
+    '#description' => t("You know — a tooltip. A little textbox that appears when the user holds their mouse over your Pinned Site's icon."),
+  );
+
+  // Pinned site start URL.
+  $form['ie']['pinned']['starturl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Set a default page for your Pinned Site'),
+    '#default_value' => (isset($settings['ie']['pinned']['starturl']) ? $settings['ie']['pinned']['starturl'] : ''),
+    '#description' => t("If the site should go to a specific URL when it is pinned (such as the homepage), enter it here. One idea is to send it to a special URL so you can track the number of pinned users, like so: http://www.example.com/index.html?pinned=TRUE"),
+  );
+
+  // Pinned Site Color.
+  $form['ie']['pinned']['color'] = array(
+    '#type' => 'textfield',
+    '#title' => t("Recolor IE9's controls manually"),
+    '#default_value' => (isset($settings['ie']['pinned']['color']) ? $settings['ie']['pinned']['color'] : ''),
+    '#description' => t("IE9 will automatically use the overall color of your Pinned Site's favicon to shade its browser buttons. UNLESS you give it another color here. Only use named colors (red) or hex colors (#f00)."),
+  );
+
+  // Pinned site size markup.
+  $form['ie']['pinned']['size'] = array(
+    '#type' => 'container',
+    '#prefix' => '<div class="container-inline">',
+    '#suffix' => '</div>',
+  );
+
+  // Description.
+  $form['ie']['pinned']['size']['description'] = array(
+    '#type' => 'item',
+    '#title' => t('Manually set the window size of a Pinned Site'),
+    '#markup' => '<div style="display:block;" class="description">If the site should open at a certain window size once pinned, you can specify the dimensions here. It only supports static pixel dimensions. 800x600 minimum.</div>',
+  );
+
+  // Pinned site width.
+  $form['ie']['pinned']['size']['width'] = array(
+    '#type' => 'textfield',
+    '#size' => 20,
+    '#title' => t('Width'),
+    '#default_value' => (isset($settings['ie']['pinned']['width']) ? $settings['ie']['pinned']['width'] : ''),
+    '#field_suffix' => 'px&nbsp;',
+  );
+
+  // Pinned site height.
+  $form['ie']['pinned']['size']['height'] = array(
+    '#type' => 'textfield',
+    '#size' => 20,
+    '#title' => t('Height'),
+    '#default_value' => (isset($settings['ie']['pinned']['height']) ? $settings['ie']['pinned']['height'] : ''),
+    '#field_suffix' => 'px',
+  );
+
+  // Pinned site jumplists wrapper.
+  $form['ie']['jumplists'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Jump Lists'),
+    '#collapsible' => TRUE,
+    '#collapsed' => ($form_state['open_jumplists'] == TRUE ? FALSE : TRUE),
+    '#states' => array(
+      'visible' => array(
+        ':input[name="ie[allow-pinned]"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+
+  // Pinned site jumpslists description.
+  $form['ie']['jumplists']['description'] = array(
+    '#type' => 'item',
+    '#description' => t("Add Jump List Tasks that will appear when the Pinned Site's icon gets a right-click. Each Task goes to the specified URL, and gets its own mini icon (essentially a favicon, a 16x16 .ICO). You can add as many of these as you need."),
+    '#title' => t('Jump List "Tasks" for Pinned Sites'),
+  );
+
+  // Pinned site jumplists containing group.
+  $form['ie']['jumplists']['group'] = array(
+    '#type' => 'container',
+    '#title' => t('Jumplists'),
+  );
+
+  // If we dont know how many jumplists are defined then add at least one.
+  if (empty($form_state['num_jumplists'])) {
+    if (isset($settings['ie']['jumplists']['group']) && count($settings['ie']['jumplists']['group']) > 0) {
+      $form_state['num_jumplists'] = count($settings['ie']['jumplists']['group']);
+    }
+    else {
+      $form_state['num_jumplists'] = 1;
+    }
+  }
+
+  // Build the number of fieldsets indicated by $form_state['num_jumplists'].
+  for ($i = 1; $i <= $form_state['num_jumplists']; $i++) {
+
+    // Wrap each group in a container.
+    $form['ie']['jumplists']['group'][$i] = array(
+      '#type' => 'fieldset',
+      '#prefix' => '<div class="container-inline">',
+      '#suffix' => '</div>',
+      '#title' => t('Task') . ' ' . $i,
+    );
+
+    // Title.
+    $form['ie']['jumplists']['group'][$i]['title'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Title'),
+      '#suffix' => '&nbsp;',
+      '#default_value' => (isset($settings['ie']['jumplists']['group'][$i]['title']) ? $settings['ie']['jumplists']['group'][$i]['title'] : ''),
+      '#size' => 30,
+    );
+
+    // Action URL.
+    $form['ie']['jumplists']['group'][$i]['url'] = array(
+      '#type' => 'textfield',
+      '#title' => t('URL'),
+      '#suffix' => '&nbsp;',
+      '#default_value' => (isset($settings['ie']['jumplists']['group'][$i]['url']) ? $settings['ie']['jumplists']['group'][$i]['url'] : ''),
+      '#size' => 30,
+    );
+
+    // Icon path.
+    $form['ie']['jumplists']['group'][$i]['image'] = array(
+      '#type' => 'managed_file',
+      '#title' => t('image'),
+      '#default_value' => (isset($settings['ie']['jumplists']['group'][$i]['image']) ? $settings['ie']['jumplists']['group'][$i]['image'] : ''),
+      '#size' => 30,
+    );
+  }
+
+  // Button to add another jumplist item group.
+  $form['ie']['jumplists']['add'] = array(
+    '#type' => 'submit',
+    '#value' => t('Add another Jumplist'),
+    '#submit' => array('head_jumplists_add_jumplist'),
+  );
+
+  // If we have more than one jumplist item, this button allows removal of
+  // the last one in the list.
+  if ($form_state['num_jumplists'] > 1) {
+    $form['ie']['jumplists']['remove'] = array(
+      '#type' => 'submit',
+      '#value' => t('Remove last Jumplist'),
+      '#submit' => array('head_jumplists_remove_jumplist'),
+      // Since we are removing a name, don't validate until later.
+      '#limit_validation_errors' => array(),
+    );
+  }
+
+  // Mobile.
+  $form['mobile'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Mobile'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+
+  // Handheld friendly.
+  $form['mobile']['handheldfriendly'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Handheld Friendly'),
+    '#description' => t('The HandheldFriendly meta-tag was used initially by older Palm and Blackberry models as well as browsers like AvantGo. &lt;meta name="HandheldFriendly" content="TRUE"&gt;'),
+    '#default_value' => (isset($settings['handheldfriendly']) ? $settings['handheldfriendly'] : 0),
+  );
+
+  // Mobile Optimised.
+  $form['mobile']['mobileoptimized'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Mobile Optimized'),
+    '#description' => t('Microsoft indroduced the MobileOptimized tag for the PocketPC. &lt;meta name="MobileOptimized" content="320"/&gt;'),
+    '#default_value' => (isset($settings['mobileoptimized']) ? $settings['mobileoptimized'] : 0),
+  );
+
+  // Web App Capable.
+  $form['mobile']['hide-address-bar'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Auto Hide Address Bar'),
+    '#description' => t('Automatically scroll 1 pixel down to hide the address bar.'),
+    '#default_value' => (isset($settings['hide-address-bar']) ? $settings['hide-address-bar'] : 0),
+  );
+
+  // Safari Links https://gist.github.com/1042026
+  $form['mobile']['safari-links'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Safari Links'),
+    '#description' => t('The script prevents links from opening in mobile safari.'),
+    '#default_value' => (isset($settings['safari-links']) ? $settings['safari-links'] : 0),
+  );
+
+  // Web App Capable.
+  $form['mobile']['mobile-web-app-capable'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Web App Capable'),
+    '#description' => t('Makes the web page run in full screen mode when launched from the home screen icon; also hides the address bar and component bar at the top and bottom of the browser.'),
+    '#default_value' => (isset($settings['mobile-web-app-capable']) ? $settings['mobile-web-app-capable'] : 0),
+  );
+
+  // Apple Mobile Status Bar Style.
+  $form['mobile']['mobile-web-app-status-bar-style'] = array(
+    '#type' => 'select',
+    '#title' => t('Status Bar Style'),
+    '#description' => t('Styles the bar at the top of the browser'),
+    '#default_value' => (isset($settings['mobile-web-app-status-bar-style']) ? $settings['mobile-web-app-status-bar-style'] : 'default'),
+    '#options' => array(
+      'default' => t('Default'),
+      'black' => t('Black'),
+      'black-translucent' => t('Black Translucent'),
+    ),
+    '#states' => array(
+      'visible' => array(
+        ':input[name=mobile-web-app-capable]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+
+  // Enable viewporting.
+  $form['mobile']['viewport-enable'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Viewport'),
+    '#description' => t('This is more widely supported by modern smartphones, including but not limited to: mobile, Android, Palm Pre, Blackberry, Windows Phone 7.'),
+    '#default_value' => (isset($settings['viewport-enable']) ? $settings['viewport-enable'] : 0),
+  );
+
+  // Viewport Settings.
+  $form['mobile']['settings'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Viewport Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#states' => array(
+      'visible' => array(
+        ':input[name=viewport-enable]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+
+  // Initial Scale.
+  $form['mobile']['settings']['initial-scale'] = array(
+    '#type' => 'select',
+    '#title' => t('Initial Scale'),
+    '#description' => t('The initial scaling of the page. This should almost always be set to 1.'),
+    '#options' => array('disabled' => 'Disabled') + drupal_map_assoc(range(1, 10, 0.5)),
+    '#default_value' => (isset($settings['initial-scale']) ? $settings['initial-scale'] : 1),
+  );
+
+  // Minimum Scale.
+  $form['mobile']['settings']['minimum-scale'] = array(
+    '#type' => 'select',
+    '#title' => t('Minimum Scale'),
+    '#description' => t('The minimum scaling of the site. This should usually be the same as your Initial scale setting.'),
+    '#options' => array('disabled' => 'Disabled') + drupal_map_assoc(range(1, 10, 0.5)),
+    '#default_value' => (isset($settings['minimum-scale']) ? $settings['minimum-scale'] : 1),
+  );
+
+  // Maximum scale.
+  $form['mobile']['settings']['maximum-scale'] = array(
+    '#type' => 'select',
+    '#title' => t('Maximum Scale'),
+    '#description' => t('The maximum scaling of the site. This can be any value between 1 and 10, but should not be too big if you want to preserve your mobile look and feel.'),
+    '#options' => array('disabled' => 'Disabled') + drupal_map_assoc(range(1, 10, 0.5)),
+    '#default_value' => (isset($settings['maximum-scale']) ? $settings['maximum-scale'] : 1),
+  );
+
+  // User scaleable.
+  $form['mobile']['settings']['user-scalable'] = array(
+    '#type' => 'select',
+    '#title' => t('Scalable by user'),
+    '#description' => t('Determine if a user can resize the screen. This is usually accomplished via multi-touch gestures on mobile and Android devices. If your mobile theme is very customized and presented with good typography and graphics for a reduced mobile size, it is recommended to leave this setting unchecked. If it is left unchecked, the min-scale and max-scale properties will be ignored.'),
+    '#default_value' => (isset($settings['user-scalable']) ? $settings['user-scalable'] : 'disabled'),
+    '#options' => array(
+      'disabled' => 'Disabled',
+      'no' => 'No',
+      'yes' => 'Yes',
+    ),
+  );
+
+  $form['actions']['#type'] = 'actions';
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save configuration'),
+  );
+
+  // Display an error message if the settings can't be saved.
+  if (!empty($_POST) && form_get_errors()) {
+    drupal_set_message(t('The settings have not been saved because of the errors.'), 'error');
+  }
+
+  // Add a submit handler to save the settings and the uploaded files.
+  $form['#submit'][] = 'head_theme_settings_submit';
+
+  // Render the form using theme_system_settings_form().
+  $form['#theme'] = 'system_settings_form';
+
+  return $form;
+}
+
+/**
+ * Custom Submit handler for the theme settings form.
+ *
+ * Can't use system_settings_form_submit as managed_file doesn't play nice
+ * with form_state_values_clean().
+ *
+ * @param array $form
+ *   Nested array of form elements that comprise the form.
+ * @param array $form_state
+ *   A keyed array containing the current state of the form.
+ */
+function head_theme_settings_submit($form, &$form_state) {
+
+  $data_to_save = variable_get('head_settings');
+
+  // Remove internal Form API values.
+  unset($form_state['values']['form_id'], $form_state['values']['form_token'], $form_state['values']['form_build_id'], $form_state['values']['op'], $form_state['values']['submit'], $form_state['values']['ie']['jumplists']['add'], $form_state['values']['ie']['jumplists']['remove']
+  );
+
+  // Retrieve the current theme name that was saved when the form was defined.
+  $theme = $form_state['theme_key'];
+
+  // Wipe the settings.
+  $data_to_save[$theme] = array();
+
+  foreach ($form_state['values'] as $key => $value) {
+    if (is_array($value) && isset($form_state['values']['array_filter'])) {
+      $value = array_keys(array_filter($value));
+    }
+    $data_to_save[$theme][$key] = $value;
+  }
+
+  // Save the settings.
+  variable_set('head_settings', $data_to_save);
+
+  drupal_set_message(t('The configuration options have been saved.'));
+
+  // All the file keys that need to be saved.
+  $files_to_save = array(
+    'touch-icon',
+    'touch-icon-precomposed',
+    'touch-icon-72x72-precomposed',
+    'touch-icon-114x114-precomposed',
+    'touch-icon-144x144-precomposed',
+    'ipad-landscape-startup',
+    'ipad-portrait-startup',
+    'iphone-startup',
+    'iphone-retina-startup',
+    'iphone5-retina-startup',
+    'ipad-portrait-retina-startup',
+    'ipad-landscape-retina-startup',
+  );
+
+  foreach ($files_to_save as $file_to_save) {
+    // Save files to a permanent location.
+    if ($file = file_load($form_state['values']['icons'][$file_to_save])) {
+      // Change status to permanent.
+      $file->status = FILE_STATUS_PERMANENT;
+      // Save.
+      file_save($file);
+      // Store the usage of the file.
+      file_usage_add($file, 'head', 'file', $file->fid);
+    }
+  }
+}
+
+/**
+ * Add Another Jumplist Button.
+ *
+ * @param array $form
+ *   Nested array of form elements that comprise the form.
+ * @param array $form_state
+ *   A keyed array containing the current state of the form.
+ */
+function head_jumplists_add_jumplist($form, &$form_state) {
+  $form_state['num_jumplists']++;
+  // Setting $form_state['rebuild'] = TRUE causes the form to be rebuilt again.
+  $form_state['rebuild'] = TRUE;
+  // Make sure the jumplist fieldset is open after adding.
+  $form_state['open_jumplists'] = TRUE;
+}
+
+/**
+ * Remove a Jumplist Button.
+ *
+ * @param array $form
+ *   Nested array of form elements that comprise the form.
+ * @param array $form_state
+ *   A keyed array containing the current state of the form.
+ */
+function head_jumplists_remove_jumplist($form, &$form_state) {
+  if ($form_state['num_jumplists'] > 1) {
+    $form_state['num_jumplists']--;
+  }
+  // Setting $form_state['rebuild'] = TRUE causes the form to be rebuilt again.
+  $form_state['rebuild'] = TRUE;
+  // Make sure the jumplist fieldset is open after adding.
+  $form_state['open_jumplists'] = TRUE;
+}
+
+/**
+ * Retrieve the current settings.
+ *
+ * @global string $theme_key
+ *   The name of the active theme.
+ * @return array
+ *   An array containing the current settings for the theme.
+ */
+function head_get_settings() {
+  global $theme_key;
+
+  // Get the theme settings.
+  $theme_settings = variable_get('head_settings');
+
+  // Load the settings for the current theme.
+  $settings = (isset($theme_settings[$theme_key]) ? $theme_settings[$theme_key] : array());
+
+  // Load the global settings.
+  $global = (isset($theme_settings['global']) ? $theme_settings['global'] : array());
+
+  // Merge the settings.
+  $settings = array_merge($global, $settings);
+
+  return $settings;
+}
+
+/**
+ * Implements hook_preprocess_html().
+ *
+ * @param array $vars
+ *   variables used in html.tpl.php
+ */
+function head_preprocess_html(&$vars) {
+  global $theme_key;
+
+  // Get the theme settings.
+  $settings = head_get_settings();
+
+  // XUA Compatible.
+  if (isset($settings['ie']['edge']) && $settings['ie']['edge'] == 1) {
+    $xua = 'IE=edge, chrome=1';
+
+    // Make this one always come first by setting a really low weight.
+    $meta = array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'http-equiv' => 'X-UA-Compatible',
+        'content' => $xua,
+      ),
+      '#weight' => '-99999',
+    );
+    drupal_add_html_head($meta, 'x-ua-compatible');
+  }
+
+  // Viewport.
+  if (isset($settings['viewport-enable']) && $settings['viewport-enable'] == 1) {
+    $viewport = 'width=320.1';
+
+    if (isset($settings['initial-scale']) && $settings['initial-scale'] != 'disabled') {
+      $viewport .= ', initial-scale=' . $settings['initial-scale'];
+    }
+    if (isset($settings['minimum-scale']) && $settings['minimum-scale'] != 'disabled') {
+      $viewport .= ', minimum-scale=' . $settings['minimum-scale'];
+    }
+    if (isset($settings['maximum-scale']) && $settings['maximum-scale'] != 'disabled') {
+      $viewport .= ', maximum-scale=' . $settings['maximum-scale'];
+    }
+    if (isset($settings['user-scalable']) && $settings['maximum-scale'] != 'disabled') {
+      $viewport .= ', user-scalable=' . $settings['user-scalable'];
+    }
+
+    $meta = array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'name' => 'viewport',
+        'content' => $viewport,
+      ),
+      '#weight' => '-1000',
+    );
+    drupal_add_html_head($meta, 'viewport');
+  }
+
+  // Handheld Friendly.
+  if (isset($settings['handheldfriendly']) && $settings['handheldfriendly'] == 1) {
+    $meta = array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'name' => 'HandheldFriendly',
+        'content' => 'TRUE',
+      ),
+      '#weight' => '-999',
+    );
+    drupal_add_html_head($meta, 'handheldfriendly');
+  }
+
+  // Mobile optimized.
+  if (isset($settings['mobileoptimized']) && $settings['mobileoptimized'] == 1) {
+    $meta = array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'name' => 'MobileOptimized',
+        'content' => '320',
+      ),
+      '#weight' => '-998',
+    );
+    drupal_add_html_head($meta, 'mobileoptimized');
+  }
+
+  // Apple touch icon.
+  if (isset($settings['icons']['touch-icon']) && $settings['icons']['touch-icon'] != '') {
+    $meta = array(
+      '#tag' => 'link',
+      '#attributes' => array(
+        'rel' => 'apple-touch-icon',
+        'href' => file_create_url(file_load($settings['icons']['touch-icon'])->uri),
+      ),
+      '#weight' => '-997',
+    );
+    drupal_add_html_head($meta, 'touch-icon');
+  }
+
+  // Apple touch icon.
+  if (isset($settings['icons']['touch-icon-precomposed']) && $settings['icons']['touch-icon-precomposed'] != '') {
+    $meta = array(
+      '#tag' => 'link',
+      '#attributes' => array(
+        'rel' => 'apple-touch-icon-precomposed',
+        'href' => file_create_url(file_load($settings['icons']['touch-icon-precomposed'])->uri),
+      ),
+      '#weight' => '-997',
+    );
+    drupal_add_html_head($meta, 'touch-icon-precomposed');
+  }
+
+  // Apple touch icon.
+  if (isset($settings['icons']['touch-icon-72x72-precomposed']) && $settings['icons']['touch-icon-72x72-precomposed'] != '') {
+    $meta = array(
+      '#tag' => 'link',
+      '#attributes' => array(
+        'rel' => 'apple-touch-icon-precomposed',
+        'sizes' => '72x72',
+        'href' => file_create_url(file_load($settings['icons']['touch-icon-72x72-precomposed'])->uri),
+      ),
+      '#weight' => '-997',
+    );
+    drupal_add_html_head($meta, 'touch-icon-72x72-precomposed');
+  }
+
+  // Apple touch icon.
+  if (isset($settings['icons']['touch-icon-114x114-precomposed']) && $settings['icons']['touch-icon-114x114-precomposed'] != '') {
+    $meta = array(
+      '#tag' => 'link',
+      '#attributes' => array(
+        'rel' => 'apple-touch-icon-precomposed',
+        'sizes' => '114x114',
+        'href' => file_create_url(file_load($settings['icons']['touch-icon-114x114-precomposed'])->uri),
+      ),
+      '#weight' => '-997',
+    );
+    drupal_add_html_head($meta, 'touch-icon-114x114-precomposed');
+  }
+
+  // Apple touch icon.
+  if (isset($settings['icons']['touch-icon-144x144-precomposed']) && $settings['icons']['touch-icon-144x144-precomposed'] != '') {
+    $meta = array(
+      '#tag' => 'link',
+      '#attributes' => array(
+        'rel' => 'apple-touch-icon-precomposed',
+        'sizes' => '144x144',
+        'href' => file_create_url(file_load($settings['icons']['touch-icon-144x144-precomposed'])->uri),
+      ),
+      '#weight' => '-997',
+    );
+    drupal_add_html_head($meta, 'touch-icon-114x114-precomposed');
+  }
+
+  // Mobile App Meta Tags.
+  if (isset($settings['mobile-web-app-capable']) && $settings['mobile-web-app-capable'] == 1) {
+    $meta = array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'name' => 'apple-mobile-web-app-capable',
+        'content' => 'yes',
+      ),
+      '#weight' => '-996',
+    );
+    drupal_add_html_head($meta, 'mobile-web-app-capable');
+
+    // Status bar.
+    if (isset($settings['mobile-web-app-status-bar-style'])) {
+      $meta = array(
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => 'apple-mobile-web-app-status-bar-style',
+          'content' => $settings['mobile-web-app-status-bar-style'],
+        ),
+        '#weight' => '-995',
+      );
+      drupal_add_html_head($meta, 'mobile-web-app-status-bar-style');
+    }
+  }
+
+  // iPhone startup Image Meta Tag.
+  if (isset($settings['icons']['iphone-startup']) && $settings['icons']['iphone-startup'] != '') {
+    $meta = array(
+      '#tag' => 'link',
+      '#attributes' => array(
+        'rel' => 'apple-touch-startup-image',
+        'href' => file_create_url(file_load($settings['icons']['iphone-startup'])->uri),
+      ),
+      '#weight' => '-993',
+    );
+    drupal_add_html_head($meta, 'iphone-touch-startup-image');
+  }
+  
+  // iPhone retina startup Image Meta Tag.
+  if (isset($settings['icons']['iphone-retina-startup']) && $settings['icons']['iphone-retina-startup'] != '') {
+    $meta = array(
+      '#tag' => 'link',
+      '#attributes' => array(
+        'rel' => 'apple-touch-startup-image',
+        'media' => 'screen and (-webkit-min-device-pixel-ratio: 2)',        
+        'href' => file_create_url(file_load($settings['icons']['iphone-retina-startup'])->uri),
+      ),
+      '#weight' => '-993',
+    );
+    drupal_add_html_head($meta, 'iphone-retina-touch-startup-image');
+  }
+  
+  // iPhone 5 retina startup Image Meta Tag.
+  if (isset($settings['icons']['iphone5-retina-startup']) && $settings['icons']['iphone5-retina-startup'] != '') {
+    $meta = array(
+      '#tag' => 'link',
+      '#attributes' => array(
+        'rel' => 'apple-touch-startup-image',
+        'media' => '(device-width: 320px)
+         and (device-height: 568px)
+         and (-webkit-device-pixel-ratio: 2)',        
+        'href' => file_create_url(file_load($settings['icons']['iphone5-retina-startup'])->uri),
+      ),
+      '#weight' => '-993',
+    );
+    drupal_add_html_head($meta, 'iphone5-retina-touch-startup-image');
+  }
+
+  // iPad startup Image Meta Tag [landsacpe].
+  if (isset($settings['icons']['ipad-landscape-startup']) && $settings['icons']['ipad-landscape-startup'] != '') {
+    $meta = array(
+      '#tag' => 'link',
+      '#attributes' => array(
+        'rel' => 'apple-touch-startup-image',
+        'sizes' => '1024x748',
+        'media' => '(device-width: 768px) and (orientation: landscape)',
+        'href' => file_create_url(file_load($settings['icons']['ipad-landscape-startup'])->uri),
+      ),
+      '#weight' => '-993',
+    );
+    drupal_add_html_head($meta, 'ipad-landscape-touch-startup-image');
+  }
+
+  // iPad startup Image Meta Tag [landsacpe].
+  if (isset($settings['icons']['ipad-landscape-retina-startup']) && $settings['icons']['ipad-landscape-retina-startup'] != '') {
+    $meta = array(
+      '#tag' => 'link',
+      '#attributes' => array(
+        'rel' => 'apple-touch-startup-image',
+        'media' => 'screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) and (-webkit-min-device-pixel-ratio: 2)',
+        'href' => file_create_url(file_load($settings['icons']['ipad-landscape-retina-startup'])->uri),
+      ),
+      '#weight' => '-993',
+    );
+    drupal_add_html_head($meta, 'ipad-landscape-retina-touch-startup-image');
+  }
+
+  // iPad startup Image Meta Tag [portrait].
+  if (isset($settings['icons']['ipad-portrait-startup']) && $settings['icons']['ipad-portrait-startup'] != '') {
+    $meta = array(
+      '#tag' => 'link',
+      '#attributes' => array(
+        'rel' => 'apple-touch-startup-image',
+        'sizes' => '768x1004',
+        'media' => 'screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)',
+        'href' => file_create_url(file_load($settings['icons']['ipad-portrait-startup'])->uri),
+      ),
+      '#weight' => '-993',
+    );
+    drupal_add_html_head($meta, 'ipad-portrait-touch-startup-image');
+  }
+  
+  // iPad startup Image Meta Tag [portrait].
+  if (isset($settings['icons']['ipad-portrait-retina-startup']) && $settings['icons']['ipad-portrait-retina-startup'] != '') {
+    $meta = array(
+      '#tag' => 'link',
+      '#attributes' => array(
+        'rel' => 'apple-touch-startup-image',
+        'sizes' => '1536x2008',
+        'media' => '(device-width: 1536px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)',
+        'href' => file_create_url(file_load($settings['icons']['ipad-portrait-retina-startup'])->uri),
+      ),
+      '#weight' => '-993',
+    );
+    drupal_add_html_head($meta, 'ipad-portrait-retina-touch-startup-image');
+  }
+
+  // Cleartype.
+  if (isset($settings['ie']['cleartype']) && ($settings['ie']['cleartype'] == 1)) {
+    $meta = array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'http-equiv' => 'cleartype',
+        'content' => 'on',
+      ),
+      '#weight' => '-992',
+    );
+    drupal_add_html_head($meta, 'cleartype');
+  }
+
+  // IE Pinned Site Name.
+  if (isset($settings['ie']['pinned']['name']) && $settings['ie']['pinned']['name'] != '') {
+    $meta = array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'name' => 'application-name',
+        'content' => $settings['ie']['pinned']['name'],
+      ),
+      '#weight' => '-990',
+    );
+    drupal_add_html_head($meta, 'name');
+  }
+
+  // IE Pinned Site Tooltip.
+  if (isset($settings['ie']['pinned']['tooltip']) && $settings['ie']['pinned']['tooltip'] != '') {
+    $meta = array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'name' => 'msapplication-tooltip',
+        'content' => $settings['ie']['pinned']['tooltip'],
+      ),
+      '#weight' => '-989',
+    );
+    drupal_add_html_head($meta, 'tooltip');
+  }
+
+  // IE Start URL.
+  if (isset($settings['ie']['pinned']['starturl']) && $settings['ie']['pinned']['starturl'] != '') {
+    $meta = array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'name' => 'msapplication-starturl',
+        'content' => $settings['ie']['pinned']['starturl'],
+      ),
+      '#weight' => '-987',
+    );
+    drupal_add_html_head($meta, 'starturl');
+  }
+
+  // Pinned Site Color.
+  if (isset($settings['ie']['pinned']['color']) && $settings['ie']['pinned']['color'] != '') {
+    $meta = array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'name' => 'msapplication-navbutton-color',
+        'content' => $theme_settings['ie']['pinned']['color'],
+      ),
+      '#weight' => '-986',
+    );
+    drupal_add_html_head($meta, 'color');
+  }
+
+  // Pinned Site Sizing.
+  if ((isset($settings['ie']['pinned']['width']) && isset($settings['ie']['pinned']['height'])) && ($settings['ie']['pinned']['width'] != '') && ($settings['ie']['pinned']['height'] != '')) {
+    $meta = array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'name' => 'msapplication-window',
+        'content' => 'width=' . $settings['ie']['pinned']['width'] . ';height=' . $settings['ie']['pinned']['height'] . '',
+      ),
+      '#weight' => '-985',
+    );
+    drupal_add_html_head($meta, 'ie_pinned_site_size');
+  }
+
+  // Suppress IE Toolbar.
+  if (isset($settings['ie']['suppress-toolbar']) && ($settings['ie']['suppress-toolbar'] == 1)) {
+    $meta = array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'http-equiv' => 'imagetoolbar',
+        'content' => 'FALSE',
+      ),
+      '#weight' => '-984',
+    );
+    drupal_add_html_head($meta, 'ie_pinned_site_size');
+  }
+
+  // IE Pinned Site Task Lists.
+  if (isset($settings['ie']['allow-pinned']) && ($settings['ie']['allow-pinned'] == 1)) {
+    $i = 0;
+    foreach ($settings['ie']['jumplists']['group'] as $task) {
+      if ($task['title'] != '') {
+        $meta = array(
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'name' => 'msapplication-task',
+            'content' => 'name=' . $task['title'] . ';action-uri=' . $task['url'] . ';icon-uri=' . $task['image'],
+          ),
+          '#weight' => -991 + $i,
+        );
+        drupal_add_html_head($meta, 'jumplist-' . $i);
+      }
+      $i++;
+    }
+  }
+
+  // Safari Links.
+  if (isset($settings['safari-links']) && $settings['safari-links'] == 1) {
+    $meta = array(
+      '#tag' => 'script',
+      '#attributes' => array(
+        'type' => 'text/javascript',
+      ),
+      '#weight' => '1',
+      '#value' => '(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")',
+    );
+    drupal_add_html_head($meta, 'safari-links');
+  }
+}
+
+/**
+ * Implements hook_process_html().
+ *
+ * @param array $vars
+ *   variables used in html.tpl.php
+ */
+function head_process_html(&$vars) {
+
+  // Get the theme settings.
+  $settings = head_get_settings();
+
+  if (isset($settings['ie']['chrome-frame']) && ($settings['ie']['chrome-frame'] == 1)) {
+    $chromeframe['include']['element'] = array(
+      '#tag' => 'script',
+      '#attributes' => array(
+        'src' => '//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js',
+      ),
+    );
+    $chromeframe['launch']['element'] = array(
+      '#tag' => 'script',
+      '#attributes' => array(),
+      '#value' => 'window.attachEvent(\'onload\',function(){CFInstall.check({mode:\'overlay\'})})',
+    );
+    $vars['page_bottom'] .= '<!--[if lt IE 10 ]>' . theme_html_tag($chromeframe['include']) . theme_html_tag($chromeframe['launch']) . '<![endif]-->';
+  }
+}
+
+/**
+ * Implements hook_init().
+ */
+function head_init() {
+  $settings = head_get_settings();
+  // Hides mobile browser's address bar when the page is done loading.
+  if (isset($settings['hide-address-bar']) && $settings['hide-address-bar'] == 1) {
+    $script = "window.addEventListener('load', function(e) {
+        setTimeout(function() { window.scrollTo(0, 1); }, 1);
+        }, false);";
+    drupal_add_js($script, array(
+      'scope' => 'footer',
+      'type' => 'inline',
+    ));
+  }
+}
+
+/**
+ * Validate the image and check for correct resolution.
+ *
+ * @param stdClass $file
+ *   The uploaded file.
+ * @param string $dimensions
+ *   A string containing the dimensions of the image. e.g. '200x200'.
+ *
+ * @return array
+ *   Returns an array of error strings.
+ */
+function head_file_validate_image_resolution(stdClass $file, $dimensions = 0) {
+  $errors = array();
+
+  // Check first that the file is an image.
+  if ($info = image_get_info($file->uri)) {
+    if ($dimensions) {
+      // Check that it is smaller than the given dimensions.
+      list($width, $height) = explode('x', $dimensions);
+      if ($info['width'] != $width || $info['height'] != $height) {
+        $errors[] = t('The image was the wrong size; the required dimensions are %dimensions pixels.', array('%dimensions' => $dimensions));
+      }
+    }
+  }
+  return $errors;
+}

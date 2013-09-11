@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Defines the module installation functions.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function head_uninstall() {
+  variable_del('head_settings');
+}

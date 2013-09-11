@@ -1,0 +1,1445 @@
+/* This file will hold styles for the mobile version of your website (mobile first). */
+/* This also can include ANY global CSS that applies site-wide. Unless overwritten by a more specific style rule, CSS declarations in global.css will apply site-wide. */
+/* line 14, ../sass/_base.scss */
+.grid-1, .grid-2, .grid-3, .grid-4, .grid-5, .grid-6, .grid-7, .grid-8, .grid-9, .grid-10, .grid-11, .grid-12, .grid-13, .grid-14, .grid-15, .grid-16, .grid-17, .grid-18, .grid-19, .grid-20, .grid-21, .grid-22, .grid-23, .grid-24 {
+  margin-left: 15px;
+  margin-right: 15px;
+  position: relative;
+}
+
+/* line 1, ../sass/_text.scss */
+h1#page-title {
+  font-size: 22px;
+}
+
+/* line 4, ../sass/_text.scss */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "PT Sans", sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* line 9, ../sass/_text.scss */
+p {
+  font-family: "PT Sans", sans-serif;
+  margin-bottom: 10px;
+  line-height: 15px;
+}
+
+/* line 4, ../sass/_forms.scss */
+input[type=text],
+input[type=password],
+textarea {
+  background-colot: #4c1500;
+  background-color: rgba(76, 21, 0, 0.45);
+  color: #FFFFFF;
+  font-family: "PT Sans", sans-serif;
+  font-size: 11px;
+  font-style: italic;
+  border: none;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  width: 90%;
+  padding: 10px 5%;
+  font-weight: normal;
+}
+
+/* line 17, ../sass/_forms.scss */
+input[type=file] {
+  -webkit-appearance: none;
+  position: relative;
+  -webkit-box-sizing: border-box;
+  width: 90%;
+}
+
+/* line 23, ../sass/_forms.scss */
+textarea {
+  resize: none;
+}
+
+/* line 26, ../sass/_forms.scss */
+.customSelect {
+  background-image: url("../images/select-bg.png");
+  background-position: center right;
+  background-repeat: no-repeat;
+  background-color: rgba(76, 21, 0, 0.45);
+  -webkit-background-size: 32px;
+  -moz-background-size: 32px;
+  -o-background-size: 32px;
+  background-size: 32px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  border: none;
+  color: #FFFFFF;
+  font-family: "PT Sans", sans-serif;
+  font-size: 11px;
+  font-style: italic;
+}
+
+/* line 39, ../sass/_forms.scss */
+.customSelectInner {
+  padding: 11px 12px 10px 10px;
+}
+
+/* line 42, ../sass/_forms.scss */
+select {
+  background-color: rgba(76, 21, 0, 0.45);
+  color: #FFFFFF;
+  font-size: 11px;
+}
+
+/* line 47, ../sass/_forms.scss */
+input[type=submit], .button {
+  background: #4c1500;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  font-size: 12px;
+  border: none;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  width: 100%;
+  padding: 10px 0;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  -webkit-appearance: none;
+}
+
+/* line 62, ../sass/_forms.scss */
+.button-sec a {
+  background: #b93400;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  font-size: 12px;
+  line-height: 15px;
+  border: none;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  padding: 8px 16px;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* line 75, ../sass/_forms.scss */
+html.js input.form-autocomplete {
+  background-image: none;
+}
+
+/**
+ * User profile / Node - Edit
+ */
+/* line 81, ../sass/_forms.scss */
+#user-profile-form a, .node-form a {
+  color: #4e1702;
+}
+/* line 82, ../sass/_forms.scss */
+#user-profile-form a.button, .node-form a.button {
+  color: #FFFFFF;
+}
+/* line 83, ../sass/_forms.scss */
+#user-profile-form label, .node-form label {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 12px;
+}
+/* line 88, ../sass/_forms.scss */
+#user-profile-form fieldset legend, .node-form fieldset legend {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 10px;
+  display: block;
+}
+/* line 95, ../sass/_forms.scss */
+#user-profile-form input, #user-profile-form textarea, #user-profile-form .customSelect, .node-form input, .node-form textarea, .node-form .customSelect {
+  margin: 7px 0;
+}
+/* line 98, ../sass/_forms.scss */
+#user-profile-form .form-item, #user-profile-form .form-actions, .node-form .form-item, .node-form .form-actions {
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+/* line 102, ../sass/_forms.scss */
+#user-profile-form .customSelect, .node-form .customSelect {
+  margin-right: 10px;
+}
+/* line 105, ../sass/_forms.scss */
+#user-profile-form .confirm-parent, #user-profile-form .password-parent, #user-profile-form div.form-item div.password-suggestions, .node-form .confirm-parent, .node-form .password-parent, .node-form div.form-item div.password-suggestions {
+  width: auto;
+}
+/* line 106, ../sass/_forms.scss */
+#user-profile-form .password-strength, #user-profile-form div.password-confirm, .node-form .password-strength, .node-form div.password-confirm {
+  display: none;
+}
+/* line 107, ../sass/_forms.scss */
+#user-profile-form .container-inline-date .date-padding, .node-form .container-inline-date .date-padding {
+  padding: 10px 0;
+}
+/* line 108, ../sass/_forms.scss */
+#user-profile-form .container-inline-date > .form-item, .node-form .container-inline-date > .form-item {
+  margin: 0;
+}
+/* line 109, ../sass/_forms.scss */
+#user-profile-form .form-type-file, .node-form .form-type-file {
+  float: left;
+}
+/* line 110, ../sass/_forms.scss */
+#user-profile-form .form-type-date-select .form-type-select[class$="hour"], .node-form .form-type-date-select .form-type-select[class$="hour"] {
+  margin-left: 0;
+}
+/* line 111, ../sass/_forms.scss */
+#user-profile-form .form-type-radio label, .node-form .form-type-radio label {
+  font-weight: normal;
+}
+
+/* line 9, ../sass/global.scss */
+body {
+  background: #b63300 url("../images/bg-pattern-streg.png") repeat;
+  -webkit-background-size: 9px 1x;
+  -moz-background-size: 9px 1x;
+  -o-background-size: 9px 1x;
+  background-size: 9px 1x;
+  font-family: "PT Sans", sans-serif;
+  font-size: 13px;
+  color: #FFFFFF;
+  -webkit-text-size-adjust: none;
+}
+
+/* line 15, ../sass/global.scss */
+img {
+  max-width: 100%;
+}
+
+/**
+ * MAIN SECTIONS
+ */
+/* line 23, ../sass/global.scss */
+.section-header .region-branding, .section-header .region-header-first {
+  max-width: 1024px;
+  margin: auto;
+}
+/* line 26, ../sass/global.scss */
+.section-header .region-branding .region-branding-inner, .section-header .region-branding .region-header-first-inner, .section-header .region-header-first .region-branding-inner, .section-header .region-header-first .region-header-first-inner {
+  margin: 0 15px;
+}
+
+/* line 31, ../sass/global.scss */
+.section-content {
+  margin: 20px auto 5px;
+  max-width: 1024px;
+}
+/* line 34, ../sass/global.scss */
+.section-content .region-content {
+  position: inherit;
+}
+/* line 36, ../sass/global.scss */
+.section-content .region-content .region-content-inner {
+  position: inherit;
+}
+
+/* line 42, ../sass/global.scss */
+.section-footer .region-footer-first {
+  margin: auto;
+  max-width: 1024px;
+}
+
+/* Sticky footer */
+/* line 49, ../sass/global.scss */
+HTML, BODY {
+  height: 100%;
+}
+
+/* line 52, ../sass/global.scss */
+.page {
+  min-height: 100%;
+  position: relative;
+}
+
+/* line 57, ../sass/global.scss */
+#section-content {
+  padding-bottom: 30px;
+}
+
+/* line 61, ../sass/global.scss */
+#section-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+}
+
+/**
+ * ICONS - Sprites
+ */
+/* line 74, ../sass/global.scss */
+.menu-calendar {
+  height: 19px;
+  width: 19px;
+  background-image: url('/sites/all/themes/bakkevej/images/sprites/red/menu-sa7a051aec0.png');
+  background-position: 0 0;
+  background-repeat: no-repeat;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (min-device-pixel-ratio: 1.5) {
+  /* line 45, ../sass/_retina-sprites.scss */
+  .menu-calendar {
+    background-image: url('/sites/all/themes/bakkevej/images/sprites-retina/red/menu-sf96bc95353.png');
+    background-position: 0 -19px;
+    -webkit-background-size: 19px auto;
+    -moz-background-size: 19px auto;
+    -o-background-size: 19px auto;
+    background-size: 19px auto;
+  }
+}
+
+/* line 77, ../sass/global.scss */
+.menu-home {
+  height: 19px;
+  width: 19px;
+  background-image: url('/sites/all/themes/bakkevej/images/sprites/red/menu-sa7a051aec0.png');
+  background-position: 0 -57px;
+  background-repeat: no-repeat;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (min-device-pixel-ratio: 1.5) {
+  /* line 45, ../sass/_retina-sprites.scss */
+  .menu-home {
+    background-image: url('/sites/all/themes/bakkevej/images/sprites-retina/red/menu-sf96bc95353.png');
+    background-position: 0 -57px;
+    -webkit-background-size: 19px auto;
+    -moz-background-size: 19px auto;
+    -o-background-size: 19px auto;
+    background-size: 19px auto;
+  }
+}
+
+/* line 80, ../sass/global.scss */
+.menu-settings {
+  height: 19px;
+  width: 19px;
+  background-image: url('/sites/all/themes/bakkevej/images/sprites/red/menu-sa7a051aec0.png');
+  background-position: 0 -19px;
+  background-repeat: no-repeat;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (min-device-pixel-ratio: 1.5) {
+  /* line 45, ../sass/_retina-sprites.scss */
+  .menu-settings {
+    background-image: url('/sites/all/themes/bakkevej/images/sprites-retina/red/menu-sf96bc95353.png');
+    background-position: 0 0;
+    -webkit-background-size: 19px auto;
+    -moz-background-size: 19px auto;
+    -o-background-size: 19px auto;
+    background-size: 19px auto;
+  }
+}
+
+/* line 83, ../sass/global.scss */
+.menu-video {
+  height: 19px;
+  width: 19px;
+  background-image: url('/sites/all/themes/bakkevej/images/sprites/red/menu-sa7a051aec0.png');
+  background-position: 0 -38px;
+  background-repeat: no-repeat;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (min-device-pixel-ratio: 1.5) {
+  /* line 45, ../sass/_retina-sprites.scss */
+  .menu-video {
+    background-image: url('/sites/all/themes/bakkevej/images/sprites-retina/red/menu-sf96bc95353.png');
+    background-position: 0 -38px;
+    -webkit-background-size: 19px auto;
+    -moz-background-size: 19px auto;
+    -o-background-size: 19px auto;
+    background-size: 19px auto;
+  }
+}
+
+/* line 90, ../sass/global.scss */
+.icon-calendar-title {
+  height: 19px;
+  width: 19px;
+  background-image: url('/sites/all/themes/bakkevej/images/sprites/red/pictograms_title-s6cb8f06ab4.png');
+  background-position: 0 0;
+  background-repeat: no-repeat;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (min-device-pixel-ratio: 1.5) {
+  /* line 45, ../sass/_retina-sprites.scss */
+  .icon-calendar-title {
+    background-image: url('/sites/all/themes/bakkevej/images/sprites-retina/red/pictograms_title-sdccb540681.png');
+    background-position: 0 -38px;
+    -webkit-background-size: 19px auto;
+    -moz-background-size: 19px auto;
+    -o-background-size: 19px auto;
+    background-size: 19px auto;
+  }
+}
+
+/* line 93, ../sass/global.scss */
+.icon-video-title {
+  height: 19px;
+  width: 19px;
+  background-image: url('/sites/all/themes/bakkevej/images/sprites/red/pictograms_title-s6cb8f06ab4.png');
+  background-position: 0 -38px;
+  background-repeat: no-repeat;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (min-device-pixel-ratio: 1.5) {
+  /* line 45, ../sass/_retina-sprites.scss */
+  .icon-video-title {
+    background-image: url('/sites/all/themes/bakkevej/images/sprites-retina/red/pictograms_title-sdccb540681.png');
+    background-position: 0 -19px;
+    -webkit-background-size: 19px auto;
+    -moz-background-size: 19px auto;
+    -o-background-size: 19px auto;
+    background-size: 19px auto;
+  }
+}
+
+/* line 96, ../sass/global.scss */
+.icon-settings-title {
+  height: 19px;
+  width: 19px;
+  background-image: url('/sites/all/themes/bakkevej/images/sprites/red/pictograms_title-s6cb8f06ab4.png');
+  background-position: 0 -19px;
+  background-repeat: no-repeat;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (min-device-pixel-ratio: 1.5) {
+  /* line 45, ../sass/_retina-sprites.scss */
+  .icon-settings-title {
+    background-image: url('/sites/all/themes/bakkevej/images/sprites-retina/red/pictograms_title-sdccb540681.png');
+    background-position: 0 0;
+    -webkit-background-size: 19px auto;
+    -moz-background-size: 19px auto;
+    -o-background-size: 19px auto;
+    background-size: 19px auto;
+  }
+}
+
+/* line 99, ../sass/global.scss */
+.icon-plus-title {
+  height: 19px;
+  width: 19px;
+  background-image: url('/sites/all/themes/bakkevej/images/sprites/red/pictograms_title-s6cb8f06ab4.png');
+  background-position: 0 -76px;
+  background-repeat: no-repeat;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (min-device-pixel-ratio: 1.5) {
+  /* line 45, ../sass/_retina-sprites.scss */
+  .icon-plus-title {
+    background-image: url('/sites/all/themes/bakkevej/images/sprites-retina/red/pictograms_title-sdccb540681.png');
+    background-position: 0 -76px;
+    -webkit-background-size: 19px auto;
+    -moz-background-size: 19px auto;
+    -o-background-size: 19px auto;
+    background-size: 19px auto;
+  }
+}
+
+/* line 102, ../sass/global.scss */
+.icon-back-title {
+  height: 19px;
+  width: 19px;
+  background-image: url('/sites/all/themes/bakkevej/images/sprites/red/pictograms_title-s6cb8f06ab4.png');
+  background-position: 0 -57px;
+  background-repeat: no-repeat;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (min-device-pixel-ratio: 1.5) {
+  /* line 45, ../sass/_retina-sprites.scss */
+  .icon-back-title {
+    background-image: url('/sites/all/themes/bakkevej/images/sprites-retina/red/pictograms_title-sdccb540681.png');
+    background-position: 0 -57px;
+    -webkit-background-size: 19px auto;
+    -moz-background-size: 19px auto;
+    -o-background-size: 19px auto;
+    background-size: 19px auto;
+  }
+}
+
+/* line 109, ../sass/global.scss */
+.icon-bad-small {
+  height: 16px;
+  width: 28px;
+  background-image: url('/sites/all/themes/bakkevej/images/sprites/red/pictograms_small-s145d6eae50.png');
+  background-position: 0 -32px;
+  background-repeat: no-repeat;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (min-device-pixel-ratio: 1.5) {
+  /* line 45, ../sass/_retina-sprites.scss */
+  .icon-bad-small {
+    background-image: url('/sites/all/themes/bakkevej/images/sprites-retina/red/pictograms_small-s16300f75f0.png');
+    background-position: 0 0;
+    -webkit-background-size: 28px auto;
+    -moz-background-size: 28px auto;
+    -o-background-size: 28px auto;
+    background-size: 28px auto;
+  }
+}
+
+/* line 112, ../sass/global.scss */
+.icon-medicin-small {
+  height: 16px;
+  width: 28px;
+  background-image: url('/sites/all/themes/bakkevej/images/sprites/red/pictograms_small-s145d6eae50.png');
+  background-position: 0 0;
+  background-repeat: no-repeat;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (min-device-pixel-ratio: 1.5) {
+  /* line 45, ../sass/_retina-sprites.scss */
+  .icon-medicin-small {
+    background-image: url('/sites/all/themes/bakkevej/images/sprites-retina/red/pictograms_small-s16300f75f0.png');
+    background-position: 0 -32px;
+    -webkit-background-size: 28px auto;
+    -moz-background-size: 28px auto;
+    -o-background-size: 28px auto;
+    background-size: 28px auto;
+  }
+}
+
+/* line 115, ../sass/global.scss */
+.icon-morgenmad-small {
+  height: 16px;
+  width: 28px;
+  background-image: url('/sites/all/themes/bakkevej/images/sprites/red/pictograms_small-s145d6eae50.png');
+  background-position: 0 -16px;
+  background-repeat: no-repeat;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (min-device-pixel-ratio: 1.5) {
+  /* line 45, ../sass/_retina-sprites.scss */
+  .icon-morgenmad-small {
+    background-image: url('/sites/all/themes/bakkevej/images/sprites-retina/red/pictograms_small-s16300f75f0.png');
+    background-position: 0 -16px;
+    -webkit-background-size: 28px auto;
+    -moz-background-size: 28px auto;
+    -o-background-size: 28px auto;
+    background-size: 28px auto;
+  }
+}
+
+/* line 122, ../sass/global.scss */
+.icon-bad-large {
+  height: 141px;
+  width: 247px;
+  background-image: url('/sites/all/themes/bakkevej/images/sprites/red/pictograms_large-s5c9f55d956.png');
+  background-position: 0 -141px;
+  background-repeat: no-repeat;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (min-device-pixel-ratio: 1.5) {
+  /* line 45, ../sass/_retina-sprites.scss */
+  .icon-bad-large {
+    background-image: url('/sites/all/themes/bakkevej/images/sprites-retina/red/pictograms_large-s673920fb1a.png');
+    background-position: 0 -141px;
+    -webkit-background-size: 247px auto;
+    -moz-background-size: 247px auto;
+    -o-background-size: 247px auto;
+    background-size: 247px auto;
+  }
+}
+
+/* line 125, ../sass/global.scss */
+.icon-medicin-large {
+  height: 141px;
+  width: 247px;
+  background-image: url('/sites/all/themes/bakkevej/images/sprites/red/pictograms_large-s5c9f55d956.png');
+  background-position: 0 0;
+  background-repeat: no-repeat;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (min-device-pixel-ratio: 1.5) {
+  /* line 45, ../sass/_retina-sprites.scss */
+  .icon-medicin-large {
+    background-image: url('/sites/all/themes/bakkevej/images/sprites-retina/red/pictograms_large-s673920fb1a.png');
+    background-position: 0 0;
+    -webkit-background-size: 247px auto;
+    -moz-background-size: 247px auto;
+    -o-background-size: 247px auto;
+    background-size: 247px auto;
+  }
+}
+
+/* line 128, ../sass/global.scss */
+.icon-morgenmad-large {
+  height: 141px;
+  width: 247px;
+  background-image: url('/sites/all/themes/bakkevej/images/sprites/red/pictograms_large-s5c9f55d956.png');
+  background-position: 0 -282px;
+  background-repeat: no-repeat;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (min-device-pixel-ratio: 1.5) {
+  /* line 45, ../sass/_retina-sprites.scss */
+  .icon-morgenmad-large {
+    background-image: url('/sites/all/themes/bakkevej/images/sprites-retina/red/pictograms_large-s673920fb1a.png');
+    background-position: 0 -282px;
+    -webkit-background-size: 247px auto;
+    -moz-background-size: 247px auto;
+    -o-background-size: 247px auto;
+    background-size: 247px auto;
+  }
+}
+
+/* line 132, ../sass/global.scss */
+.picto {
+  display: block;
+  float: left;
+  margin: 0 5px 0 0;
+}
+
+/* line 136, ../sass/global.scss */
+.picto-title {
+  display: block;
+  float: left;
+  margin: 0 10px 0 0;
+}
+
+/**
+ * HEADER - Menu
+ */
+/* line 144, ../sass/global.scss */
+.zone-branding {
+  height: 43px;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #d4d4d4));
+  background-image: -webkit-linear-gradient(#ffffff, #d4d4d4);
+  background-image: -moz-linear-gradient(#ffffff, #d4d4d4);
+  background-image: -o-linear-gradient(#ffffff, #d4d4d4);
+  background-image: linear-gradient(#ffffff, #d4d4d4);
+}
+/* line 147, ../sass/global.scss */
+.zone-branding div.branding-data {
+  float: left;
+  width: 30%;
+}
+/* line 150, ../sass/global.scss */
+.zone-branding div.branding-data img {
+  height: 25px;
+  margin: 9px 0 0 0;
+}
+/* line 155, ../sass/global.scss */
+.zone-branding div.block-menu-block {
+  float: left;
+  width: 70%;
+}
+/* line 160, ../sass/global.scss */
+.zone-branding .menu-block-1 ul {
+  float: right;
+  position: relative;
+  right: -15px;
+}
+/* line 165, ../sass/global.scss */
+.zone-branding .menu-block-1 li {
+  float: left;
+  padding: 12px 15px 12px;
+  border-right: 1px solid #cbcbcb;
+}
+/* line 169, ../sass/global.scss */
+.zone-branding .menu-block-1 li a {
+  display: block;
+  width: 19px;
+  height: 19px;
+}
+
+/**
+ * HEADER - Title
+ */
+/* line 180, ../sass/global.scss */
+.zone-header {
+  height: 20px;
+  padding: 10px 0;
+  background-color: #4e1702;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+/* line 185, ../sass/global.scss */
+.zone-header .back-btn-wrapper {
+  height: 19px;
+  padding: 11px 12px 10px 12px;
+  margin: -10px 12px 0 -15px;
+  border-right: 1px solid #a4897e;
+  float: left;
+}
+/* line 191, ../sass/global.scss */
+.zone-header .back-btn-wrapper a {
+  float: left;
+  display: block;
+}
+
+/**
+ * FOOTER
+ */
+/* line 200, ../sass/global.scss */
+.zone-footer {
+  padding: 8px 0;
+  height: 14px;
+  background-color: #4e1702;
+  font-size: 9px;
+  line-height: 9px;
+  text-align: center;
+}
+/* line 206, ../sass/global.scss */
+.zone-footer p {
+  margin-bottom: 0;
+}
+
+/**
+ * NODES
+ */
+/* line 213, ../sass/global.scss */
+.page-node h1#page-title {
+  color: #FFFFFF;
+  text-align: center;
+}
+/* line 218, ../sass/global.scss */
+.page-node .node .content {
+  color: #FFFFFF;
+  font-size: 13px;
+  line-height: 15px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* line 230, ../sass/global.scss */
+.node-type-event h1#page-title {
+  display: none;
+}
+/* line 231, ../sass/global.scss */
+.node-type-event h2.node-title {
+  padding: 12px 0;
+  border-bottom: 1px solid white;
+  border-top: 1px solid white;
+  margin-bottom: 22px;
+  font-size: 22px;
+  line-height: 22px;
+}
+/* line 238, ../sass/global.scss */
+.node-type-event .field-name-field-event-category {
+  margin: 0 auto 30px;
+}
+/* line 241, ../sass/global.scss */
+.node-type-event .field-name-field-event-date {
+  font-weight: bold;
+  font-size: 17px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+/* line 247, ../sass/global.scss */
+.node-type-event .field-name-body {
+  font-size: 12px;
+}
+/* line 248, ../sass/global.scss */
+.node-type-event .field-name-field-event-video {
+  color: #4e1702;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #4e1702;
+}
+/* line 253, ../sass/global.scss */
+.node-type-event .field-name-field-event-video .field-name-body {
+  margin-top: 5px;
+  color: #4e1702;
+}
+/* line 258, ../sass/global.scss */
+.node-type-event .field-label {
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+/* line 262, ../sass/global.scss */
+.page-node-add h1#page-title {
+  display: none;
+}
+
+/**
+ * TABS
+ */
+/* line 268, ../sass/global.scss */
+.tabs {
+  margin-bottom: 20px;
+}
+
+/* line 271, ../sass/global.scss */
+ul.tabs.primary {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 13px;
+  line-height: 13px;
+  margin: 0 0 0 -2%;
+}
+/* line 276, ../sass/global.scss */
+ul.tabs.primary li {
+  float: left;
+  display: block;
+  text-align: center;
+  margin: 0 0 0 2%;
+  width: 31%;
+}
+/* line 282, ../sass/global.scss */
+ul.tabs.primary li a {
+  background-color: #4e1702;
+  color: #FFFFFF;
+  text-decoration: none;
+  display: block;
+  padding: 8px 0;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+}
+/* line 292, ../sass/global.scss */
+ul.tabs.primary li.active a {
+  background-color: #FFFFFF;
+  color: #4e1702;
+}
+/* line 301, ../sass/global.scss */
+ul.tabs.primary li:nth-child(3) {
+  width: 32%;
+}
+
+/* line 307, ../sass/global.scss */
+.page-node ul.tabs.primary li {
+  width: 48%;
+}
+
+/**
+ * USER LOGIN PAGE
+ */
+/* line 318, ../sass/global.scss */
+.page-user.not-logged-in h1#page-title {
+  display: none;
+}
+/* line 319, ../sass/global.scss */
+.page-user.not-logged-in .zone-branding {
+  display: none;
+}
+
+/* line 323, ../sass/global.scss */
+form#user-login {
+  padding: 0 41px;
+}
+/* line 325, ../sass/global.scss */
+form#user-login #edit-name::-webkit-input-placeholder, form#user-login #edit-pass::-webkit-input-placeholder {
+  color: #FFFFFF;
+}
+
+/* line 329, ../sass/global.scss */
+div#user-login-header {
+  text-align: center;
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+/* line 333, ../sass/global.scss */
+div#user-login-header img {
+  width: 192px;
+  height: 98px;
+  margin: auto;
+}
+
+/* line 339, ../sass/global.scss */
+div#user-login-footer {
+  text-align: center;
+  color: #4e1702;
+  font-size: 11px;
+}
+/* line 343, ../sass/global.scss */
+div#user-login-footer a {
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+
+/** 
+ * USER PROFILE
+ */
+/* line 354, ../sass/global.scss */
+.page-user #page-title {
+  display: none;
+}
+/* line 357, ../sass/global.scss */
+.page-user #zone-header {
+  display: none;
+}
+
+/* line 362, ../sass/global.scss */
+.page-user-edit #zone-header {
+  display: block;
+}
+
+/* line 367, ../sass/global.scss */
+#user-profile-form .user-picture {
+  float: left;
+}
+/* line 369, ../sass/global.scss */
+#user-profile-form .user-picture img {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  max-width: 116px;
+  max-height: 116px;
+  margin: 0 10px 10px 0;
+}
+
+/* line 373, ../sass/global.scss */
+.profile .user-picture {
+  float: left;
+  margin: 0 1em 0 0;
+}
+/* line 376, ../sass/global.scss */
+.profile .user-picture img {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  max-width: 116px;
+  max-height: 116px;
+}
+/* line 378, ../sass/global.scss */
+.profile .field {
+  font-size: 13px;
+  line-height: 17px;
+}
+/* line 381, ../sass/global.scss */
+.profile .field-name-field-user-mobile {
+  margin-top: 10px;
+  clear: right;
+}
+/* line 384, ../sass/global.scss */
+.profile .field-name-field-user-mobile a {
+  color: #FFFFFF;
+}
+/* line 388, ../sass/global.scss */
+.profile .field-name-field-user-mobile:after {
+  content: inherit;
+}
+/* line 392, ../sass/global.scss */
+.profile .field-name-field-user-mobile,
+.profile .field-email {
+  font-weight: bold;
+}
+/* line 395, ../sass/global.scss */
+.profile .field-name-field-user-name {
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+/* line 399, ../sass/global.scss */
+.profile .field-label-above .field-label {
+  float: left;
+}
+/* line 401, ../sass/global.scss */
+.profile .view {
+  float: left;
+  width: 100%;
+}
+/* line 404, ../sass/global.scss */
+.profile .view h2 {
+  font-size: 22px;
+  line-height: 22px;
+  margin: 20px 0;
+}
+/* line 409, ../sass/global.scss */
+.profile p {
+  float: left;
+  width: 100%;
+}
+/* line 412, ../sass/global.scss */
+.profile .logout {
+  float: left;
+}
+
+/**
+ * CALENDAR
+ */
+/* line 421, ../sass/global.scss */
+.view-calendar,
+.view-calendar-administrator {
+  font-size: 12px;
+  font-family: "PT Sans", sans-serif;
+  margin-bottom: 15px;
+  /* Month View */
+}
+/* line 426, ../sass/global.scss */
+.view-calendar .date-nav-wrapper,
+.view-calendar-administrator .date-nav-wrapper {
+  position: inherit;
+}
+/* line 428, ../sass/global.scss */
+.view-calendar .date-nav-wrapper .date-nav,
+.view-calendar-administrator .date-nav-wrapper .date-nav {
+  position: inherit;
+}
+/* line 431, ../sass/global.scss */
+.view-calendar .date-nav-wrapper .date-nav ul.pager li,
+.view-calendar-administrator .date-nav-wrapper .date-nav ul.pager li {
+  padding: 0;
+  position: absolute;
+  border-radius: 0;
+  background: transparent;
+}
+/* line 436, ../sass/global.scss */
+.view-calendar .date-nav-wrapper .date-nav ul.pager li a,
+.view-calendar-administrator .date-nav-wrapper .date-nav ul.pager li a {
+  color: #FFFFFF;
+  margin: 0;
+  display: block;
+  height: 56px;
+  width: 22px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.75) 0 0 7px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.75) 0 0 7px;
+  box-shadow: rgba(0, 0, 0, 0.75) 0 0 7px;
+  -webkit-background-size: 8px 13px;
+  -moz-background-size: 8px 13px;
+  -o-background-size: 8px 13px;
+  background-size: 8px 13px;
+  background-color: #4e1702;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+/* line 448, ../sass/global.scss */
+.view-calendar .date-nav-wrapper .date-nav ul.pager li.date-prev,
+.view-calendar-administrator .date-nav-wrapper .date-nav ul.pager li.date-prev {
+  position: absolute;
+  left: 0;
+  top: 200px;
+  right: auto;
+  margin: 0;
+}
+/* line 451, ../sass/global.scss */
+.view-calendar .date-nav-wrapper .date-nav ul.pager li.date-prev a,
+.view-calendar-administrator .date-nav-wrapper .date-nav ul.pager li.date-prev a {
+  -moz-border-radius-topright: 3px;
+  -webkit-border-top-right-radius: 3px;
+  border-top-right-radius: 3px;
+  -moz-border-radius-bottomright: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  background-image: url("../images/icon-pager-prev.png");
+}
+/* line 456, ../sass/global.scss */
+.view-calendar .date-nav-wrapper .date-nav ul.pager li.date-next,
+.view-calendar-administrator .date-nav-wrapper .date-nav ul.pager li.date-next {
+  position: absolute;
+  right: 0;
+  top: 200px;
+  left: auto;
+  margin: 0;
+}
+/* line 459, ../sass/global.scss */
+.view-calendar .date-nav-wrapper .date-nav ul.pager li.date-next a,
+.view-calendar-administrator .date-nav-wrapper .date-nav ul.pager li.date-next a {
+  -moz-border-radius-topleft: 3px;
+  -webkit-border-top-left-radius: 3px;
+  border-top-left-radius: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  background-image: url("../images/icon-pager-next.png");
+}
+/* line 467, ../sass/global.scss */
+.view-calendar .views-exposed-widgets,
+.view-calendar-administrator .views-exposed-widgets {
+  position: relative;
+}
+/* line 470, ../sass/global.scss */
+.view-calendar .views-exposed-form .views-exposed-widget,
+.view-calendar-administrator .views-exposed-form .views-exposed-widget {
+  padding: 0;
+  float: none;
+}
+/* line 473, ../sass/global.scss */
+.view-calendar .views-exposed-form .views-exposed-widget input[type=submit],
+.view-calendar-administrator .views-exposed-form .views-exposed-widget input[type=submit] {
+  height: 34px;
+  margin: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 45px;
+}
+/* line 485, ../sass/global.scss */
+.view-calendar .month-view table,
+.view-calendar-administrator .month-view table {
+  font-size: 13px;
+  font-weight: bold;
+}
+/* line 488, ../sass/global.scss */
+.view-calendar .month-view table th,
+.view-calendar-administrator .month-view table th {
+  text-transform: uppercase;
+  background-color: #FFFFFF;
+  border: none;
+  color: #4e1702;
+  padding: 3px 5px 8px;
+}
+/* line 495, ../sass/global.scss */
+.view-calendar .month-view table td,
+.view-calendar-administrator .month-view table td {
+  text-align: center;
+  color: #4e1702;
+  padding: 0 5px;
+}
+/* line 499, ../sass/global.scss */
+.view-calendar .month-view table td div.month,
+.view-calendar-administrator .month-view table td div.month {
+  padding: 5px 0;
+}
+/* line 500, ../sass/global.scss */
+.view-calendar .month-view table td a,
+.view-calendar-administrator .month-view table td a {
+  color: #b93400;
+  font-weight: bold;
+}
+/* line 505, ../sass/global.scss */
+.view-calendar .month-view table td.today,
+.view-calendar-administrator .month-view table td.today {
+  background: #FFF;
+}
+/* line 507, ../sass/global.scss */
+.view-calendar .month-view table td.today .month,
+.view-calendar-administrator .month-view table td.today .month {
+  background: #b93400;
+  color: #FFFFFF;
+}
+/* line 510, ../sass/global.scss */
+.view-calendar .month-view table td.today .month a,
+.view-calendar-administrator .month-view table td.today .month a {
+  color: #FFFFFF;
+}
+
+/* MONTH VIEW */
+/* line 522, ../sass/global.scss */
+.view-calendar.view-display-id-page_1 .date-nav,
+.view-calendar-administrator.view-display-id-page_1 .date-nav {
+  padding: 0;
+  margin-bottom: 0;
+}
+/* line 524, ../sass/global.scss */
+.view-calendar.view-display-id-page_1 .date-nav .date-heading h3,
+.view-calendar-administrator.view-display-id-page_1 .date-nav .date-heading h3 {
+  font-size: 17px;
+  text-transform: uppercase;
+  text-align: left;
+}
+/* line 528, ../sass/global.scss */
+.view-calendar.view-display-id-page_1 .date-nav .date-heading h3 a,
+.view-calendar-administrator.view-display-id-page_1 .date-nav .date-heading h3 a {
+  color: #4e1702;
+  text-decoration: none;
+}
+/* line 534, ../sass/global.scss */
+.view-calendar.view-display-id-page_1 > .view-header,
+.view-calendar-administrator.view-display-id-page_1 > .view-header {
+  padding: 35px 18px 0 18px;
+  background-image: url("../images/calendar-top.png");
+  background-position: top center;
+  -webkit-background-size: 1024px;
+  -moz-background-size: 1024px;
+  -o-background-size: 1024px;
+  background-size: 1024px;
+}
+/* line 540, ../sass/global.scss */
+.view-calendar.view-display-id-page_1 > .view-content,
+.view-calendar-administrator.view-display-id-page_1 > .view-content {
+  background-color: #FFFFFF;
+  padding: 0 18px 15px 18px;
+}
+/* line 544, ../sass/global.scss */
+.view-calendar.view-display-id-page_1 > .view-footer,
+.view-calendar-administrator.view-display-id-page_1 > .view-footer {
+  padding: 0 18px 15px;
+  background-image: url("../images/calendar-btm.png");
+  background-position: bottom right;
+  -webkit-background-size: 1024px;
+  -moz-background-size: 1024px;
+  -o-background-size: 1024px;
+  background-size: 1024px;
+  color: #4e1702;
+  min-height: 100px;
+  font-size: 12px;
+}
+/* line 552, ../sass/global.scss */
+.view-calendar.view-display-id-page_1 > .view-footer h3,
+.view-calendar-administrator.view-display-id-page_1 > .view-footer h3 {
+  font-weight: normal;
+  margin-bottom: 4px;
+}
+/* line 556, ../sass/global.scss */
+.view-calendar.view-display-id-page_1 > .view-footer .views-field-title,
+.view-calendar-administrator.view-display-id-page_1 > .view-footer .views-field-title {
+  float: left;
+  width: 100%;
+}
+/* line 560, ../sass/global.scss */
+.view-calendar.view-display-id-page_1 > .view-footer span,
+.view-calendar-administrator.view-display-id-page_1 > .view-footer span {
+  text-transform: uppercase;
+  font-weight: bold;
+  line-height: 19px;
+}
+/* line 565, ../sass/global.scss */
+.view-calendar.view-display-id-page_1 > .view-footer a,
+.view-calendar-administrator.view-display-id-page_1 > .view-footer a {
+  margin-top: 8px;
+}
+/* line 569, ../sass/global.scss */
+.view-calendar.view-display-id-page_1 .calendar-calendar,
+.view-calendar-administrator.view-display-id-page_1 .calendar-calendar {
+  border-bottom: 1px solid #ddd4cf;
+  padding-bottom: 16px;
+}
+
+/* WEEK VIEW */
+/* line 578, ../sass/global.scss */
+.view-calendar.view-display-id-page_2 .date-nav,
+.view-calendar-administrator.view-display-id-page_2 .date-nav {
+  padding: 0;
+  margin-bottom: 3px;
+}
+/* line 580, ../sass/global.scss */
+.view-calendar.view-display-id-page_2 .date-nav .date-heading h3,
+.view-calendar-administrator.view-display-id-page_2 .date-nav .date-heading h3 {
+  font-size: 22px;
+  line-height: 22px;
+  text-transform: uppercase;
+  text-align: left;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+/* line 588, ../sass/global.scss */
+.view-calendar.view-display-id-page_2 .group-wrapper,
+.view-calendar-administrator.view-display-id-page_2 .group-wrapper {
+  font-family: "PT Sans", sans-serif;
+  padding: 0;
+  margin-top: 10px;
+  border-bottom: 1px solid #4e1702;
+  border-right: 1px solid #4e1702;
+  background: #FFFFFF;
+  padding: 10px 18px;
+  overflow: hidden;
+  color: #4e1702;
+  font-size: 12px;
+  line-height: 19px;
+}
+/* line 600, ../sass/global.scss */
+.view-calendar.view-display-id-page_2 .group-wrapper h3,
+.view-calendar-administrator.view-display-id-page_2 .group-wrapper h3 {
+  margin-bottom: 10px;
+}
+/* line 603, ../sass/global.scss */
+.view-calendar.view-display-id-page_2 .group-wrapper .views-row,
+.view-calendar-administrator.view-display-id-page_2 .group-wrapper .views-row {
+  float: left;
+  width: 100%;
+  margin-bottom: 3px;
+}
+/* line 606, ../sass/global.scss */
+.view-calendar.view-display-id-page_2 .group-wrapper .views-row .views-field-field-cat-machine-name,
+.view-calendar-administrator.view-display-id-page_2 .group-wrapper .views-row .views-field-field-cat-machine-name {
+  float: left;
+}
+/* line 609, ../sass/global.scss */
+.view-calendar.view-display-id-page_2 .group-wrapper .views-row .views-field-field-event-date-1,
+.view-calendar-administrator.view-display-id-page_2 .group-wrapper .views-row .views-field-field-event-date-1 {
+  float: left;
+}
+/* line 612, ../sass/global.scss */
+.view-calendar.view-display-id-page_2 .group-wrapper .views-row .views-field-title,
+.view-calendar-administrator.view-display-id-page_2 .group-wrapper .views-row .views-field-title {
+  float: left;
+}
+/* line 614, ../sass/global.scss */
+.view-calendar.view-display-id-page_2 .group-wrapper .views-row .views-field-title a,
+.view-calendar-administrator.view-display-id-page_2 .group-wrapper .views-row .views-field-title a {
+  color: #4e1702;
+  text-decoration: none;
+}
+
+/* line 622, ../sass/global.scss */
+.day-footer-msg {
+  color: #FFFFFF;
+  text-align: center;
+  font-style: italic;
+  font-size: 12px;
+}
+
+/* DAY VIEW */
+/* line 634, ../sass/global.scss */
+.view-calendar.view-display-id-page_3 .date-nav,
+.view-calendar.view-display-id-page_4 .date-nav,
+.view-calendar-administrator.view-display-id-page_3 .date-nav,
+.view-calendar-administrator.view-display-id-page_4 .date-nav {
+  padding: 0;
+  margin-bottom: 13px;
+}
+/* line 636, ../sass/global.scss */
+.view-calendar.view-display-id-page_3 .date-nav .date-heading h3,
+.view-calendar.view-display-id-page_4 .date-nav .date-heading h3,
+.view-calendar-administrator.view-display-id-page_3 .date-nav .date-heading h3,
+.view-calendar-administrator.view-display-id-page_4 .date-nav .date-heading h3 {
+  font-size: 22px;
+  line-height: 22px;
+  text-transform: uppercase;
+  text-align: left;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+/* line 643, ../sass/global.scss */
+.view-calendar.view-display-id-page_3 .views-row,
+.view-calendar.view-display-id-page_4 .views-row,
+.view-calendar-administrator.view-display-id-page_3 .views-row,
+.view-calendar-administrator.view-display-id-page_4 .views-row {
+  font-family: "PT Sans", sans-serif;
+  padding: 0;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #4e1702;
+  border-right: 1px solid #4e1702;
+}
+/* line 649, ../sass/global.scss */
+.view-calendar.view-display-id-page_3 .views-row .ui-accordion-content,
+.view-calendar.view-display-id-page_4 .views-row .ui-accordion-content,
+.view-calendar-administrator.view-display-id-page_3 .views-row .ui-accordion-content,
+.view-calendar-administrator.view-display-id-page_4 .views-row .ui-accordion-content {
+  padding: 0 12px 12px;
+  border: none;
+  border-radius: 0;
+  margin-bottom: 1px;
+}
+/* line 655, ../sass/global.scss */
+.view-calendar.view-display-id-page_3 .views-row .views-field-title,
+.view-calendar.view-display-id-page_4 .views-row .views-field-title,
+.view-calendar-administrator.view-display-id-page_3 .views-row .views-field-title,
+.view-calendar-administrator.view-display-id-page_4 .views-row .views-field-title {
+  border-radius: 0;
+  background: #FFFFFF;
+  border: none;
+  padding: 0;
+  font-size: 12px;
+  line-height: 17px;
+}
+/* line 661, ../sass/global.scss */
+.view-calendar.view-display-id-page_3 .views-row .views-field-title a,
+.view-calendar.view-display-id-page_4 .views-row .views-field-title a,
+.view-calendar-administrator.view-display-id-page_3 .views-row .views-field-title a,
+.view-calendar-administrator.view-display-id-page_4 .views-row .views-field-title a {
+  color: #4e1702;
+  padding: 10px 10px;
+}
+/* line 665, ../sass/global.scss */
+.view-calendar.view-display-id-page_3 .views-row .views-field-title > .ui-icon,
+.view-calendar.view-display-id-page_4 .views-row .views-field-title > .ui-icon,
+.view-calendar-administrator.view-display-id-page_3 .views-row .views-field-title > .ui-icon,
+.view-calendar-administrator.view-display-id-page_4 .views-row .views-field-title > .ui-icon {
+  display: none;
+}
+/* line 666, ../sass/global.scss */
+.view-calendar.view-display-id-page_3 .views-row .views-field-title .past,
+.view-calendar.view-display-id-page_4 .views-row .views-field-title .past,
+.view-calendar-administrator.view-display-id-page_3 .views-row .views-field-title .past,
+.view-calendar-administrator.view-display-id-page_4 .views-row .views-field-title .past {
+  text-decoration: line-through;
+  color: #a4897e;
+  text-transform: capitalize;
+}
+/* line 670, ../sass/global.scss */
+.view-calendar.view-display-id-page_3 .views-row .views-field-title .past a,
+.view-calendar.view-display-id-page_4 .views-row .views-field-title .past a,
+.view-calendar-administrator.view-display-id-page_3 .views-row .views-field-title .past a,
+.view-calendar-administrator.view-display-id-page_4 .views-row .views-field-title .past a {
+  color: #a4897e;
+}
+/* line 675, ../sass/global.scss */
+.view-calendar.view-display-id-page_3 .views-row .views-field-title.ui-state-active,
+.view-calendar.view-display-id-page_4 .views-row .views-field-title.ui-state-active,
+.view-calendar-administrator.view-display-id-page_3 .views-row .views-field-title.ui-state-active,
+.view-calendar-administrator.view-display-id-page_4 .views-row .views-field-title.ui-state-active {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+/* line 679, ../sass/global.scss */
+.view-calendar.view-display-id-page_3 .views-row .views-field-body,
+.view-calendar.view-display-id-page_4 .views-row .views-field-body,
+.view-calendar-administrator.view-display-id-page_3 .views-row .views-field-body,
+.view-calendar-administrator.view-display-id-page_4 .views-row .views-field-body {
+  margin-bottom: 20px;
+}
+/* line 681, ../sass/global.scss */
+.view-calendar.view-display-id-page_3 .views-row .views-field-body .views-label-body,
+.view-calendar.view-display-id-page_4 .views-row .views-field-body .views-label-body,
+.view-calendar-administrator.view-display-id-page_3 .views-row .views-field-body .views-label-body,
+.view-calendar-administrator.view-display-id-page_4 .views-row .views-field-body .views-label-body {
+  font-weight: bold;
+}
+
+/**
+ * Videos View
+ */
+/* line 690, ../sass/global.scss */
+.page-video #page-title {
+  margin-bottom: 15px;
+}
+
+/* line 695, ../sass/global.scss */
+.view-videos .view-content {
+  margin-left: -15px;
+}
+/* line 698, ../sass/global.scss */
+.view-videos h3 {
+  padding: 0 0 5px 15px;
+  float: left;
+  width: 100%;
+  font-size: 15px;
+}
+/* line 703, ../sass/global.scss */
+.view-videos .views-row {
+  float: left;
+  margin-left: 15px;
+  margin-bottom: 15px;
+  line-height: 19px;
+  width: 137px;
+  height: 120px;
+}
+/* line 710, ../sass/global.scss */
+.view-videos .views-exposed-widgets {
+  position: relative;
+  margin-bottom: 20px;
+}
+/* line 713, ../sass/global.scss */
+.view-videos .views-exposed-widgets .views-exposed-widget {
+  float: none;
+  padding: 0;
+}
+/* line 716, ../sass/global.scss */
+.view-videos .views-exposed-widgets .views-exposed-widget .form-text {
+  margin: 0;
+}
+/* line 719, ../sass/global.scss */
+.view-videos .views-exposed-widgets .views-exposed-widget .form-text::-webkit-input-placeholder {
+  color: #FFFFFF;
+}
+/* line 722, ../sass/global.scss */
+.view-videos .views-exposed-widgets .views-exposed-widget .form-submit {
+  margin: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 45px;
+  height: 34px;
+  -webkit-background-size: 15px;
+  -moz-background-size: 15px;
+  -o-background-size: 15px;
+  background-size: 15px;
+  background-image: url("../images/icon-search.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+}

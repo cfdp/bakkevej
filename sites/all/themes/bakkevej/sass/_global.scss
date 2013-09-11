@@ -1,0 +1,802 @@
+/* This file will hold styles for the mobile version of your website (mobile first). */
+/* This also can include ANY global CSS that applies site-wide. Unless overwritten by a more specific style rule, CSS declarations in global.css will apply site-wide. */
+
+@import "text";
+@import "forms";
+@import "retina-sprites";
+@import "pictograms";
+
+html,body {
+	font-family: $font-fam-std; font-size: $font-size-std; color: #FFFFFF;
+	-webkit-text-size-adjust: none;
+}
+img {
+	max-width: 100%;
+}
+a {
+	color: $color-dark;
+}
+/**
+ * MAIN SECTIONS
+ */
+.section-header {
+	.region-branding, .region-header-first {
+		max-width: 1024px;
+		margin: auto;
+		.region-branding-inner, .region-header-first-inner {
+			margin: 0 15px;
+		}
+	}
+}
+.section-content {
+	margin: 20px auto 5px;
+	max-width: 1024px;
+	.region-content {
+		position: inherit;
+		.region-content-inner { 
+			position: inherit;
+		}
+	}
+}
+.section-footer {
+	.region-footer-first {
+		margin: auto;
+		max-width: 1024px;
+	}
+}
+
+/* Sticky footer */
+HTML, BODY {
+  height: 100%;
+}
+.page {
+  min-height: 100%;
+  position: relative;
+}
+
+#section-content {
+  padding-bottom: 30px;
+}
+
+#section-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+}
+
+.picto {
+	display: block; float: left;
+	margin: 0 5px 0 0;
+}
+.picto-title {
+	display: block; float: left;
+	margin: 0 10px 0 0;
+}
+
+/**
+ * HEADER - Menu
+ */
+.zone-branding {
+	@include background-image(linear-gradient(#FFFFFF, #d4d4d4));
+	background-color: #d4d4d4;
+	.region-branding {
+	}
+	.block-color-logo {
+		float: left;
+		width: 30%;
+		img {
+			height: 25px;
+			margin: 9px 0 0 0;
+		}
+	}
+	.block-menu-block {
+		float: left;
+		width: 70%;
+	}
+	.menu-block-1, .menu-block-2 {
+		ul {
+			float: right;
+			position: relative;
+			right: -15px;
+		}
+		li {
+			float: left;
+			padding: 12px 15px 12px;
+			border-right: 1px solid #cbcbcb;
+			a {
+				display: block;
+				width: 19px; height: 19px;
+			}
+		}
+		li.last {
+			border-right: 0;
+		}
+	}
+	.block-menu-block-3 {
+		display: none;
+		padding: 10px 0;
+		width: 100%; float: left;
+		ul {	
+			margin: 0; padding: 0;
+			li {
+				float: right;
+				margin: 0 0 0 15px; padding: 0;
+				font-size: 12px; font-weight: bold; text-transform: uppercase;
+				a { color: $color-dark; text-decoration: none; }
+			}
+		}
+	}
+}
+
+/**
+ * HEADER - Title
+ */
+.zone-header {
+	padding: 0;
+	background-color: $color-dark;
+	font-size: 16px; line-height: 20px;
+	font-weight: bold; text-transform: uppercase;
+	.back-btn-wrapper {
+		height: 19px;
+		padding: 11px 12px 10px 12px;
+		margin: 0 12px 0 -15px;
+		border-right: 1px solid $color-past;
+		float: left;
+		a {
+			float: left; display: block;
+		}
+	}
+	.title-wrapper {
+		padding: 10px 0;
+	}
+}
+
+/**
+ * FOOTER
+ */
+.zone-footer {
+	padding: 8px 0;
+	height: 14px;
+	background-color: $color-dark;
+	font-size: 9px; line-height: 9px;
+	text-align: center;
+	p { margin-bottom: 0; }
+}
+
+/**
+ * NODES
+ */
+.page-node {
+	h1#page-title {
+		color: #FFFFFF;
+		text-align: center;
+	}
+	.node {
+		.content {
+			color: #FFFFFF;
+			font-size: $font-size-std;
+			line-height: $line-height-std;
+			text-align: center;
+			margin-bottom: 15px;
+		}
+	}
+}
+
+.node-type-event {
+  h1#page-title { display: none; }
+  h2.node-title {
+    padding: 12px 0;
+    border-bottom: 1px solid white;
+    border-top: 1px solid white;
+    margin-bottom: 22px;
+    font-size: 22px; line-height: 22px; 
+  }
+}
+
+article.node-event {
+	.field { margin: 0 0 10px 0; }
+	.field-name-field-event-category {
+		margin: 0 auto 30px;
+	}
+	.field-name-field-event-date {
+		font-weight: bold;
+		font-size: 17px; line-height: 17px;
+		text-transform: uppercase;
+		margin-bottom: 10px;
+		.field-item {
+			margin-bottom: 5px;
+		}
+	}
+	.field-name-body { font-size: 12px; }
+	.field-name-field-event-video {
+		color: $color-dark;
+		margin-top: 10px;
+		padding-top: 10px;
+		border-top: 1px dashed $color-dark;
+		.field-name-body {
+			margin-top: 5px;
+			color: $color-dark;
+		}
+	}
+	.field-label { text-transform: uppercase; margin-bottom: 5px; }
+	#event-metadata { padding-top: 10px; border-top: 1px dashed #FFFFFF; }
+}
+
+.page-node-add {
+	h1#page-title { display: none; }
+}
+
+/**
+ * TABS
+ */
+.tabs {
+	margin-bottom: 20px;
+}
+ul.tabs.primary {
+	margin: 0;
+	text-transform: uppercase;
+	font-size: $font-size-std; line-height: $font-size-std;
+	margin: 0 0 0 -2%;
+	li {
+		float: left;
+		display: block;		
+		text-align: center;
+		margin: 0 0 0 2%;
+		width: 31%;
+		a {
+			background-color: $color-dark;
+			color: #FFFFFF;
+			text-decoration: none;
+			display: block;
+			padding: 8px 0;
+			@include border-radius(3px);
+		}
+	}
+	li.active {
+		a {
+			background-color: #FFFFFF;
+			color: $color-dark;
+		}
+	}
+	li:nth-child(1) {
+	}
+	li:nth-child(2) {
+	}
+	li:nth-child(3) {
+		width: 32%;
+	}
+}
+.page-node {
+	ul.tabs.primary {
+		li {
+			width: 48%;
+			a {}
+		}
+	}
+}
+
+/**
+ * USER LOGIN PAGE
+ */
+.page-user.not-logged-in {
+	h1#page-title { display: none; }
+	.zone-branding {
+		display: none;
+	}
+}
+form#user-login {
+	padding: 0 41px;
+	#edit-name::-webkit-input-placeholder, #edit-pass::-webkit-input-placeholder {
+		color: #FFFFFF;
+	}
+}
+div#user-login-header {
+	text-align: center;
+	margin-bottom: 40px;
+	margin-top: 40px;
+	img {
+		width: 192px;
+		height: 98px;
+		margin: auto;
+	}
+}
+div#user-login-footer {
+	text-align: center;
+	color: $color-dark;
+	font-size: 11px;
+	a {
+		text-transform: uppercase;
+		color: #FFFFFF;
+	}
+}
+
+/** 
+ * USER PROFILE
+ */
+ 
+.page-user {
+	#page-title {
+		display: none;
+	}
+	#zone-header { 
+		display: none; 
+	}
+}
+.page-user-edit {
+	#zone-header { 
+		display: block; 
+	}
+}
+#user-profile-form {
+	.user-picture {
+		float: left;
+		img { @include border-radius(3px); max-width: 116px; max-height: 116px; margin: 0 10px 10px 0; }
+	}
+}
+.profile {
+	.user-picture {
+		float: left;
+		margin: 0 1em 0 0;
+		img { @include border-radius(3px); max-width: 116px; max-height: 116px; }
+	}
+	.field {
+		font-size: $font-size-std; line-height: 17px;
+	}
+	.field-name-field-user-mobile {
+		margin-top: 10px;
+		clear: right;
+		a { color: #FFFFFF; }
+	}
+	.field-email {
+	}
+	.field-name-field-user-mobile:after {
+		content: inherit;
+	}
+	.field-name-field-user-mobile,
+	.field-email {
+		font-weight: bold;
+	}
+	.field-name-field-user-name {
+		font-size: 16px; text-transform: uppercase; font-weight: bold;
+	}
+	.field-label-above {
+		.field-label { float: left; }
+	}
+	.view {
+		float: left;
+		width: 100%;
+		h2 {
+			font-size: 22px; line-height: 22px;
+			margin: 20px 0;
+		}
+	}
+	p {
+		float: left; width: 100%;
+	}
+	h3 { border-bottom: none; }
+	.logout {
+		float: left;
+	}
+}
+
+/**
+ * CALENDAR
+ */
+.view-calendar, 
+.view-calendar-administrator {
+	overflow: hidden;
+	font-size: 12px;
+	font-family: $font-fam-std;
+	margin-bottom: 15px;
+	.date-nav-wrapper {
+		position: inherit;
+		.date-nav {
+			position: inherit;
+			ul.pager {
+				li {
+					padding: 0;
+					position: absolute;
+					border-radius: 0;
+					background: transparent;
+					a {
+						color: #FFFFFF;
+						margin: 0;
+						display: block;
+						height: 56px; width: 22px;
+						@include box-shadow(rgba(black, 0.75) 0 0 7px);
+						@include background-size(8px 13px);
+						background-color: $color-dark;
+						background-repeat: no-repeat;
+						background-position: center center;
+					}
+				}
+				li.date-prev { 
+					position: absolute; left: 0; top: 200px; right: auto;
+					margin: 0;
+					a { 
+						@include border-right-radius(3px);
+						background-image: url("../images/icon-pager-prev.png");
+					}
+				}
+				li.date-next { 
+					position: absolute; right: 0; top: 200px; left: auto;
+					margin: 0;
+					a { 
+						@include border-left-radius(3px); 
+						background-image: url("../images/icon-pager-next.png");
+					}
+				}
+			}
+		}
+	}
+	
+	.views-exposed-widgets {
+		position: relative;
+		margin-bottom: 15px;
+		label {
+			margin-bottom: 5px;
+			line-height: 1em;
+		}
+		.form-submit {
+			margin-top: 16px;
+			padding: 10px;
+		}
+	}
+	
+	/* Month View */
+	.month-view {
+		table {
+			font-size: $font-size-std;
+			font-weight: bold;
+			th {
+				text-transform: uppercase;
+				background-color: #FFFFFF;
+				border: none;
+				color: $color-dark;
+				padding: 3px 5px 8px;
+			}
+			td {
+				text-align: center;
+				color: $color-dark;
+				padding: 0 5px;
+				div.month { padding: 5px 0; }
+				a {
+					color: $color-light;
+					font-weight: bold;
+				}
+			}
+			td.today {
+				background: #FFF;
+				.month {
+				background: $color-light;
+				color: #FFFFFF;
+				a { color: #FFFFFF; }
+				}
+			}
+			
+		}
+	}	
+}
+
+/* MONTH VIEW */
+.view-calendar.view-display-id-page_1,
+.view-calendar-administrator.view-display-id-page_1  {
+
+	.date-nav {
+		padding: 0; margin-bottom: 0;
+		.date-heading h3 {
+			font-size: 17px;
+			text-transform: uppercase;
+			text-align: left;
+			a {
+				color: $color-dark;
+				text-decoration: none;
+			}	
+		}
+	}
+	> .view-header {
+		padding: 35px 18px 0 18px;	
+		background-image: url("../images/calendar-top.png");
+		background-position: top center;
+		@include background-size(1024px);
+	}
+	> .view-content {
+		background-color: #FFFFFF;
+		padding: 0 18px 15px 18px;	
+	}
+	> .view-footer {
+		padding: 0 18px 15px;
+		background-image: url("../images/calendar-btm.png");
+		background-position: bottom right;
+		@include background-size(1024px);		
+		color: $color-dark;
+		min-height: 100px;
+		font-size: 12px;
+		h3 {
+			font-weight: normal;
+			margin-bottom: 4px;
+		}
+		.views-field-title {
+			float: left;
+			width: 100%;
+		}
+		span {
+			text-transform: uppercase;
+			font-weight: bold;
+			line-height: 19px;
+		}
+		a {
+			margin-top: 8px;
+		}
+	}
+	.calendar-calendar {
+		border-bottom: 1px solid #ddd4cf;
+		padding-bottom: 16px;
+	}
+}
+
+/* WEEK VIEW */
+.view-calendar.view-display-id-page_2,
+.view-calendar-administrator.view-display-id-page_2 {
+	.date-nav {
+		padding: 0; margin-bottom: 0px;
+		.date-heading h3 {
+			font-size: 22px; line-height: 22px;
+			text-transform: uppercase;
+			text-align: left;
+			font-weight: bold;
+			color: #FFFFFF;		
+		}
+	}
+	.view-grouping {
+		.view-grouping-header {
+			font-weight: bold;
+			text-transform: uppercase;
+			font-size: 14px; line-height: 14px;
+			margin-top: 15px;
+		}
+	}
+		.group-wrapper {
+			font-family: $font-fam-std;
+			padding: 0;
+			margin-top: 10px;
+			border-bottom: 1px solid $color-dark;
+			border-right: 1px solid $color-dark;
+			background: #FFFFFF;
+			padding: 10px 18px;
+			overflow: hidden;
+			color: $color-dark;
+			font-size: 12px; line-height: 19px;
+	
+			h3 {
+				margin-bottom: 10px;
+			}
+			.views-row {	
+				float: left; width: 100%;
+				margin-bottom: 3px;
+				.views-field-field-cat-machine-name {
+					float: left;
+				}
+				.views-field-field-event-date-1 {
+					float: left;
+				}
+				.views-field-title {
+					float: left;
+					a {
+						color: $color-dark;		
+						text-decoration: none;
+					}
+				}
+			}
+		}
+}
+.day-footer-msg {
+	color: #FFFFFF;
+	text-align: center;
+	font-style: italic;
+	font-size: 12px;
+	margin-top: 15px;
+}
+
+/* DAY VIEW */
+.view-calendar.view-display-id-page_3,
+.view-calendar.view-display-id-page_4,
+.view-calendar-administrator.view-display-id-page_3,
+.view-calendar-administrator.view-display-id-page_4,
+.view-calendar-administrator.view-display-id-page_5 {
+	.date-nav {
+		padding: 0; margin-bottom: 0px;
+		.date-heading h3 {
+			font-size: 22px; line-height: 22px;
+			text-transform: uppercase;
+			text-align: left;
+			font-weight: bold;
+			color: #FFFFFF;		}
+	}
+	.view-content > h3 {
+		font-size: 14px; line-height: 14px;
+		margin-top: 15px;
+		font-weight: bold;
+	}
+	.views-row {
+		font-family: $font-fam-std;
+		padding: 0;
+		margin-top: 10px;
+		border-bottom: 1px solid $color-dark;
+		border-right: 1px solid $color-dark;
+		.ui-accordion-content {
+			padding: 0 12px 12px;
+			border: none;
+			border-radius: 0;
+			margin-bottom: 1px;
+		}
+		.views-field-title {
+			border-radius: 0;
+			background: #FFFFFF;
+			border: none;
+			padding: 0;
+			font-size: 12px; line-height: 17px;
+			a {
+				color: $color-dark;		
+				padding: 10px 10px;
+			}
+			> .ui-icon { display: none; }
+			.past {
+				text-decoration: line-through;
+				color: $color-past;
+				text-transform: capitalize;
+				a {
+					color: $color-past;
+				}
+			}
+		}
+		.views-field-title.ui-state-active {
+			font-weight: bold;
+			text-transform: uppercase;		
+		}
+		.views-field-body {
+			margin-bottom: 20px;
+			.views-label-body { font-weight: bold; }
+		}
+	}
+}
+
+/* SEARCH RESULTS VIEW */
+#views-exposed-form-calendar-administrator-page-5 {
+	position: relative;
+	margin-bottom: 10px;
+	.views-exposed-widget {
+		padding: 0;
+		float: none;
+	}
+	input[type=submit] {
+	margin: 0;
+	position: absolute; right: 0; top: 0;
+	width: 45px; height: 34px;
+	@include background-size(15px);
+	background-image: url("../images/icon-search.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+	}
+	.form-text { margin: 0; }
+	.form-text::-webkit-input-placeholder {
+	color: #FFFFFF;
+	}
+}
+
+/**
+ * Videos View
+ */
+.page-video {
+	#page-title {
+		margin-bottom: 15px;
+	}
+}
+.view-videos {
+	overflow-x: hidden;
+	div { overflow-x: hidden; }
+	.view-content {
+		margin-left: -15px;
+	}
+	h3 {
+		padding: 0 0 5px 15px;
+		float: left; width: 100%;
+		font-size: 15px;
+	}
+	.views-row {
+		float: left;
+		margin-left: 15px;
+		margin-bottom: 15px;
+		line-height: 19px;
+		width: 137px; height: 120px;
+	}
+	.view-filters {
+		overflow-x: hidden !important; width: auto;
+		div { overflow-x: hidden !important; width: auto; }
+		* { overflow-x: hidden; }
+	}
+	.views-exposed-widgets {
+		position: relative;
+		margin-bottom: 20px;
+		.views-exposed-widget {
+			float: none;
+			padding: 0;
+			.form-text {
+				margin: 0;
+			}
+			.form-text::-webkit-input-placeholder {
+				color: #FFFFFF;
+			}
+			.form-submit {
+				margin: 0;
+				position: absolute; right: 0; top: 0;
+				width: 45px; height: 34px;
+				@include background-size(15px);
+				background-image: url("../images/icon-search.png");
+				background-position: center center;
+				background-repeat: no-repeat;
+			}
+		}
+	}
+}
+
+@media only screen and (min-width: 768px) {
+  .view-videos {
+    .views-row {
+      width: 321px;
+      height: 223px;
+      iframe {
+        width: 321px;
+        height: 180px;
+      }
+    }
+  }
+}
+
+#autocomplete {
+  @include box-shadow(rgba(black, 0.75) 0 0 3px);
+  ul {
+    li {
+      padding: 5px 10px;
+    }
+  }
+}
+.item-list {
+ul.pager {
+	li {
+		padding: 0;
+		a { font-weight: bold; }
+	}	
+}
+}
+
+/**
+ * USER ADMINISTRATION
+ */
+.view-user-administration {
+	.view-content {
+		margin-bottom: 15px;
+		table {
+			width: 100%;
+			th {
+				text-transform: uppercase; 
+				font-weight: bold;
+				border-bottom: 1px solid #FFFFFF;
+				padding: 0 0 7px 0;
+			}
+			tr {
+				background: transparent;
+				border: none;
+			}
+			td {
+				background: transparent;
+				padding: 7px 0;
+			}
+			a { color: $color-dark; }
+		}
+	}
+	.view-footer {
+		
+	}
+}

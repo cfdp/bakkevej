@@ -1,0 +1,9 @@
+/* line 3, ../sass/bg_checkers.scss */
+body {
+  background-image: url("../images/bg-pattern-tern.png");
+  background-repeat: repeat;
+  -webkit-background-size: 84px 84px;
+  -moz-background-size: 84px 84px;
+  -o-background-size: 84px 84px;
+  background-size: 84px 84px;
+}

@@ -1,0 +1,7 @@
+@import "compass/css3";
+
+body {
+	background-image: url("../images/bg-pattern-streg.png");
+	background-repeat: repeat;
+	@include background-size(9px 1x);
+}

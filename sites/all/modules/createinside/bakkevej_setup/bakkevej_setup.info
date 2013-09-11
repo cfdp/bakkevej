@@ -1,0 +1,4 @@
+name = Bakkevej Setup
+description = Ekstra blokke og anden opsætning
+version = 7.x-1.0
+core = 7.x

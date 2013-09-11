@@ -1,0 +1,13 @@
+h1#page-title {
+	font-size: 22px;
+}
+h1,h2,h3,h4,h5,h6 {
+	font-family: $font-fam-std;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+p {
+	font-family: $font-fam-std;
+	margin-bottom: 10px;
+	line-height: $line-height-std;
+}

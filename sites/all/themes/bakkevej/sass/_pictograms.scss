@@ -1,0 +1,44 @@
+.picto-title {
+	display: block; float: left;
+	margin: 0 10px 0 0;
+}
+.picto-large {
+	width: 247px; height: 141px;
+}
+.picto-small {
+	 width: 28px; height: 16px;
+	display: block; float: left;
+	margin: 0 5px 0 0;
+}
+
+@import "retina-magic";
+
+$picto-large-layout:horizontal;
+@import "sprites/picto-large/*.png";
+@include all-picto-large-sprites;
+
+$picto-large-retina-layout:horizontal;
+@import "sprites-retina/picto-large-retina/*.png";
+@include all-retina-sprites($picto-large-sprites, $picto-large-retina-sprites);
+
+/**
+ * HEADER TITLE BAR
+ */
+$sprites: sprite-map("sprites/picto-title/*.png");
+$sprites2x: sprite-map("sprites-retina/picto-title/*.png");
+
+.icon-calendar-title {
+	@include retina-sprite(calendar);
+}
+.icon-video-title {
+	@include retina-sprite(video);
+}
+.icon-settings-title {
+	@include retina-sprite(settings);
+}
+.icon-plus-title {
+	@include retina-sprite(plus);
+}
+.icon-back-title {
+	@include retina-sprite(back);
+}

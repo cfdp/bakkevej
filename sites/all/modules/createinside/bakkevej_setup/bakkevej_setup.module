@@ -1,0 +1,167 @@
+<?php
+
+/**
+ * Implements hook_block_info().
+ */
+function bakkevej_setup_block_info() {
+  $blocks = array();
+  $blocks['header_title'] = array(
+    'info' => t('Header title'),
+  );
+  $blocks['color_logo'] = array(
+    'info' => t('Color logo'),
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function bakkevej_setup_block_view($delta='') {
+  $block = array();
+ 
+  switch($delta) {
+    case 'header_title' :
+      $block['content'] = bakkevej_setup_block_content();
+      $block['status'] = 0;
+    break;
+    case 'color_logo' :
+      $block['content'] = bakkevej_setup_logo_block_content();
+      $block['status'] = 0;
+    break;
+  }
+  return $block;
+}
+
+/**
+ * Header Block
+ */
+function bakkevej_setup_block_content() {
+	
+	$str = "<div class='back-btn-wrapper'><a href='javascript:history.go(-1)' class='icon-back-title'></a></div>";
+	
+	$str .= "<div class='title-wrapper'>";
+	
+	switch(arg(0)) {
+		case "calendar": 
+			$str .= "<span class='icon-calendar-title picto-title'></span>Kalender";
+		break;
+		case "calendar-admin": 
+			$str .= "<span class='icon-calendar-title picto-title'></span>Kalender";
+		break;
+		case "node":
+			if(arg(1)=="add") {
+				if(arg(2)=="event") {
+					$str .= "<span class='icon-plus-title picto-title'></span>Opret opgave";
+				}
+				else {
+					$str .= "<span class='icon-plus-title picto-title'></span>Opret video";
+				}
+			}
+			else {
+				$node = node_load(arg(1));	
+				if($node->type=="event") {
+					if(arg(2)=="edit") {
+						$str .= "<span class='icon-calendar-title picto-title'></span>Rediger opgave";
+					}
+					else {
+						$str .= "<span class='icon-calendar-title picto-title'></span>Kalender";
+					}
+				}
+			}
+		break;
+		case "user":
+			if(arg(2)=="edit") {
+				$str .= "<span class='icon-settings-title picto-title'></span>Rediger profil";
+			}
+			else $str .= "";
+		break;
+		case "video":
+			$str .= "<span class='icon-video-title picto-title'></span>Videoarkiv";
+		break;
+		case "admin": 
+			if(arg(1)=="brugere") {
+			$str .= "<span class='icon-settings-title picto-title'></span>Brugeroversigt";
+			}
+			elseif(arg(1)=="people") {
+			$str .= "<span class='icon-plus-title picto-title'></span>Opret bruger";
+			}
+			elseif(arg(3)=="videokategorier") {
+			$str .= "<span class='icon-plus-title picto-title'></span>Opret videokategori";
+			}
+		break;
+		default:
+			$str = "";
+		break;
+	}
+	
+	$str .= "</div>";
+ 
+	return $str;
+}
+
+/**
+ * Logo Block
+ */
+function bakkevej_setup_logo_block_content() {
+	
+	global $user;
+	$account = user_load($user->uid);
+	
+	$str = "<a href='/'>";
+	
+	// COLORS
+	if(isset($account->field_user_theme[LANGUAGE_NONE][0]["value"])) {
+		$str .= "<img src='/".drupal_get_path('theme','bakkevej')."/images/logo-".$account->field_user_theme[LANGUAGE_NONE][0]["value"].".png' />";
+	}
+	else {
+		$str .= "<img src='/".drupal_get_path('theme','bakkevej')."/images/logo-red.png' />";	
+	}
+	$str .= "</a>";
+	
+	return $str;
+}
+
+/**
+ * hook_node_validation
+ */
+function bakkevej_setup_node_validate($node, $form, &$form_state) {
+	// Validate Events
+	if($node->type=="event") {
+		// Max of 90 repeats in repeat rule
+		$rrule_count = $form_state['input']['field_event_date']['und'][0]['rrule']['count_child'];
+	  if($rrule_count>90) {
+	  	form_set_error('field_event_date', "En opgave kan højst gentages 90 gange");
+	  }
+  }
+}
+
+/**
+ * Rules
+ */
+function bakkevej_setup_rules_action_info() {
+  return array(
+    'bakkevej_setup_create_duration' => array(
+      'label' => t('Create a duration from a number of seconds'),
+      'group' => t('Custom'),
+      'parameter' => array(
+        'number_of_seconds' => array(
+          'type' => 'integer',
+          'label' => t('Number of seconds')
+        )
+      ),
+      'provides' => array(
+        'duration' => array(
+          'type' => 'duration',
+          'label' => t("Duration")
+        )
+      )
+    )
+  );
+}
+
+function bakkevej_setup_create_duration($number_of_seconds) {
+  return array(
+    'duration' => $number_of_seconds
+  );
+}

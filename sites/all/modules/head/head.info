@@ -1,0 +1,11 @@
+name = Head
+description = "Provides a range of meta tags for controlling site appearance on mobile, linking artwork and icons, and IE specific settings such as site pinning."
+core = 7.x
+configure = admin/appearance/advanced
+
+; Information added by drupal.org packaging script on 2012-10-08
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "head"
+datestamp = "1349699801"
+

@@ -1,0 +1,7 @@
+@import "compass/css3";
+
+body {
+	background-image: url("../images/bg-pattern-prik.png");
+	background-repeat: repeat;
+	@include background-size(173px 139px);
+}

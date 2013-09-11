@@ -1,0 +1,76 @@
+@import "base";
+
+/**
+ * BASE COLORS
+ */
+$color-light: #66a231;
+$color-dark: #203c06;
+$color-past: #8f9d82;
+$color-bg: #618f38;
+$color-input: #203c06;
+
+@import "global";
+
+body {
+	background-color: $color-bg;
+}
+
+/**
+ * SELECT
+ */
+.customSelect {
+	background-image: url("../images/select-bg-green.png");
+}
+
+/**
+ * PICTOGRAMS
+ */
+
+@import "retina-magic";
+
+@import "sprites/green/picto-small/*.png";
+@include all-picto-small-sprites;
+
+@import "sprites-retina/green/picto-small-retina/*.png";
+@include all-retina-sprites($picto-small-sprites, $picto-small-retina-sprites);
+
+@import "sprites/green/picto-small-light/*.png";
+@include all-picto-small-light-sprites;
+
+@import "sprites-retina/green/picto-small-light-retina/*.png";
+@include all-retina-sprites($picto-small-light-sprites, $picto-small-light-retina-sprites);
+
+/**
+ * MAIN MENU
+ */
+$sprites: sprite-map("sprites/green/picto-menu/*.png");
+$sprites2x: sprite-map("sprites-retina/green/picto-menu/*.png");
+
+.menu-calendar {
+	@include retina-sprite(calendar);
+}
+.menu-home {
+	@include retina-sprite(home);
+}
+.menu-settings {
+	@include retina-sprite(settings);
+}
+.menu-video {
+	@include retina-sprite(video);
+}
+
+$sprites: sprite-map("sprites/green/picto-menu-light/*.png");
+$sprites2x: sprite-map("sprites-retina/green/picto-menu-light/*.png");
+
+.menu-calendar-active {
+	@include retina-sprite(calendar);
+}
+.menu-home-active {
+	@include retina-sprite(home);
+}
+.menu-settings-active {
+	@include retina-sprite(settings);
+}
+.menu-video-active {
+	@include retina-sprite(video);
+}

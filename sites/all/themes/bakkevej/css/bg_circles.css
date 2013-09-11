@@ -1,0 +1,9 @@
+/* line 3, ../sass/bg_circles.scss */
+body {
+  background-image: url("../images/bg-pattern-prik.png");
+  background-repeat: repeat;
+  -webkit-background-size: 173px 139px;
+  -moz-background-size: 173px 139px;
+  -o-background-size: 173px 139px;
+  background-size: 173px 139px;
+}

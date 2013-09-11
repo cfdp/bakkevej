@@ -1,0 +1,9 @@
+/* line 3, ../sass/bg_lines.scss */
+body {
+  background-image: url("../images/bg-pattern-streg.png");
+  background-repeat: repeat;
+  -webkit-background-size: 9px 1x;
+  -moz-background-size: 9px 1x;
+  -o-background-size: 9px 1x;
+  background-size: 9px 1x;
+}
